@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Member</title>
+</head>
+<body>
+
+<h1> Opret bruger </h1>
+
+<form action="#" th:action="@{/login/createUser}" th:obejct="${createUser}" method="post">
+    <p> Name: <input type="text" th:feild="*{name}" required></p>
+
+    <p> Email: <input type="email" th:feild="*{email}" required></p>
+
+    <p> Password: <input type="password" th:feild="*{password}" required></p>
+
+    <p> Sex : <input type="text" th:feild="*{sex}" required></p>
+
+    <p> Birth: <input type="datetime-local" th:feild="*{dateBirth}" required></p>
+
+    <p> Height Cm: <input type="text" th:feild="*{heightCm}" required></p>
+
+    <p> WeightKg: <input type="text" th:feild="*{weightKg}" required></p>
+    
+    <p> Goal: <input type="text" th:feild="*{goal}" required></p>
+
+    <button type="submit">Opret</button>
+</form>
+
+<a href="/login">Back</a>
+
+
+</body>
+</html>

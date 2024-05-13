@@ -13,6 +13,7 @@ public class User {
     private int id;
     private String name;
     private String email;
+    private String password;
     private byte sex;
     private Date dateBirth;
     private int heightCm;
@@ -28,6 +29,7 @@ public class User {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
         this.sex = sex;
         this.dateBirth = dateBirth;
         this.heightCm = heightCm;
@@ -59,6 +61,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public byte getSex() {
