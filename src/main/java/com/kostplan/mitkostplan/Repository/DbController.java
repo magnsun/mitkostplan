@@ -4,6 +4,7 @@ import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Entity.Recipe;
 import com.kostplan.mitkostplan.Entity.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
