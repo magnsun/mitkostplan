@@ -20,15 +20,15 @@ public class User {
     private byte sex;
     private Date dateBirth;
     private int heightCm;
-    private double weightKg;
-    private double bmi;
+    private int weightKg;
+    private double bmr;
     private byte goal;
     private boolean subscribed;
 
     public User() {
     }
 
-    public User(int id, String name, String email, byte sex, Date dateBirth, int heightCm, double weightKg, double bmi, byte goal, boolean subscribed) {
+    public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, double bmr, byte goal, boolean subscribed) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -37,7 +37,7 @@ public class User {
         this.dateBirth = dateBirth;
         this.heightCm = heightCm;
         this.weightKg = weightKg;
-        this.bmi = bmi;
+        this.bmr = bmr;
         this.goal = goal;
         this.subscribed = subscribed;
     }
@@ -106,12 +106,12 @@ public class User {
         this.weightKg = weightKg;
     }
 
-    public double getBmi() {
-        return bmi;
+    public double getBmr() {
+        return bmr;
     }
 
-    public void setBmi(double bmi) {
-        this.bmi = bmi;
+    public void setBmr(double bmr) {
+        this.bmr = bmr;
     }
 
     public byte getGoal() {
