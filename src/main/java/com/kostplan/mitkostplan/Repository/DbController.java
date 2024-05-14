@@ -49,13 +49,12 @@ public class DbController {
     }
 
     //Create item
-    public void createUser(User user) throws SQLException {
+    public void createUser(User user) {
+        String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal) VALUES (?,?,?,?,?,?,?,?)";
         try{
-            String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal) VALUES (?,?,?,?,?,?,?,?)";
-            jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm()+
-            user.getWeightKg(),user.getGoal());
+            jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm(), user.getWeightKg(),user.getGoal());
         } catch (DataAccessException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error creating user: " + e.getMessage(), e);
         }
     }
 

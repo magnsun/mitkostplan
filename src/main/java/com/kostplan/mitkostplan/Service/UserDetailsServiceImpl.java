@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,8 +40,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             if (optionalUser.isEmpty()) {
                 throw new UsernameNotFoundException("User not found");
             }
+
             User user = optionalUser.get();
-            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+            return new org.springframework.security.core.userdetails.User(
+                    user.getEmail(),
+                    user.getPassword(),
+                    getAuthorities(user)
+            );
 
         } catch (EmptyResultDataAccessException e){
             throw new UsernameNotFoundException("User not found with email: " + username);

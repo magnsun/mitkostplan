@@ -43,13 +43,9 @@ public class UseCase {
 //        return dbController.getAllRecipes();
 //    }
 
-    // Create items
+    // Create user
     public void createUser(User user){
-        try {
-            dbController.createUser(user);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        dbController.createUser(user);
     }
 
 }

@@ -28,7 +28,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, double bmr, byte goal) {
+    public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, byte goal) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -37,7 +37,6 @@ public class User {
         this.dateBirth = dateBirth;
         this.heightCm = heightCm;
         this.weightKg = weightKg;
-        this.bmr = bmr;
         this.goal = goal;
     }
 
@@ -112,7 +111,7 @@ public class User {
         this.heightCm = heightCm;
     }
 
-    public double getWeightKg() {
+    public int getWeightKg() {
         return weightKg;
     }
 
