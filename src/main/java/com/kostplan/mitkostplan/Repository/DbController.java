@@ -6,7 +6,15 @@ import com.kostplan.mitkostplan.Entity.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.dao.EmptyResultDataAccessException;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Repository
 public class DbController {
@@ -15,7 +23,7 @@ public class DbController {
 
 
     @Autowired
-    public DbController(JdbcTemplate jdbcTemplate){
+    public DbController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
