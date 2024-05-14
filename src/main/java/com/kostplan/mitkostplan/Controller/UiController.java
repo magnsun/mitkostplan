@@ -41,16 +41,15 @@ public class UiController {
         useCase.updateUser(user);
         return "redirect:/settings";
     }
-    @GetMapping("login/createUser")
+    @GetMapping("login/create")
     public String createUser(Model model, User user){
         model.addAttribute("createUser", new User());
         return "create";
     }
 
-    @PostMapping("login/createUser")
+    @PostMapping("create/createUser")
     public String createUser(@ModelAttribute User user){
         useCase.createUser(user);
         return "redirect:/login";
     }
-
 }

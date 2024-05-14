@@ -76,7 +76,7 @@ public class DbController {
         try{
             String storedSubscribtion = jdbcTemplate.queryForObject(sql, new Object[]{id}, String.class);
             reture storedSubscribtion != null;
-        }(DataAccessException e){
+        }catch (DataAccessException e){
             reture false;
         }
     }*/

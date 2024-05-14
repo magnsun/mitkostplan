@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>update</title>
 </head>
 <body>
 
@@ -13,19 +13,29 @@
     <p>Name: <input type="text" th:field="*{name}" required> </p>
     <p>Email: <input type="email" th:field="*{email}" required> </p>
     <p>Password: <input type="password" th:field="*{password}" required> </p>
-    <p>Sex: <input type="text" th:field="*{sex}" required> </p>
+
+    <label for="goal">Sex:</label>
+    <select name="text" id="sex">
+        <option value="0">Male</option>
+        <option value="1">Female</option>
+        <option value="2">Other</option>
+    </select>
+
     <p>Birthday: <input type="datetime-local" th:field="*{dateBirth}" required> </p>
     <p>Height: <input type="text" th:field="*{heightCm}" required> </p>
     <p>Weight: <input type="text" th:field="*{weightKg}" required> </p>
-    <p>Goal: <input type="text" th:field="*{goal}" required> </p>
+
     <label for="goal">Choose a goal:</label>
-    <select name="goal" id="goal">
-        <option value="weightGain">Weight gain</option>
-        <option value="weightLoss">weight loss</option>
-        <option value="maintainWeight">Maintain weight</option>
-        <option value="training">Training</option>
-        <option value="training">touch grass</option>
+
+    <select name="text" id="goal">
+        <option value="0">Weight gain</option>
+        <option value="1">weight loss</option>
+        <option value="2">Maintain weight</option>
+        <option value="3">Training</option>
     </select>
+
+    <p></p>
+    <button type="update">Update</button>
 
 </form>
 
