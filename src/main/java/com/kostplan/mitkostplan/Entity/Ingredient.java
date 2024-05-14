@@ -1,7 +1,6 @@
 package com.kostplan.mitkostplan.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Ingredient {
@@ -10,6 +9,10 @@ public class Ingredient {
     private int id;
     private String name;
     private int amount;
+
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipeIngredients;
 
     public Ingredient() {
     }
@@ -28,5 +31,21 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Recipe getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public void setRecipeIngredients(Recipe recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 }

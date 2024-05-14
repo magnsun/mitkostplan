@@ -21,7 +21,7 @@ public class Recipe {
     private int fat;
     private int sugar;
 
-    @OneToMany(mappedBy = "recipeingredients")
+    @OneToMany(mappedBy = "recipeIngredients")
     private Set<Ingredient> ingredient;
 
     public Recipe(int id, String name, String method, int protein, int calories, int fat, int sugar, Set<Ingredient> ingredient) {

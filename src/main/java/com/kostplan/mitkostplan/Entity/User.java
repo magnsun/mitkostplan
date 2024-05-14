@@ -28,6 +28,19 @@ public class User {
     public User() {
     }
 
+    public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, double bmr, byte goal) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.sex = sex;
+        this.dateBirth = dateBirth;
+        this.heightCm = heightCm;
+        this.weightKg = weightKg;
+        this.bmr = bmr;
+        this.goal = goal;
+    }
+
     public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, double bmr, byte goal, boolean subscribed) {
         this.id = id;
         this.name = name;
@@ -41,6 +54,7 @@ public class User {
         this.goal = goal;
         this.subscribed = subscribed;
     }
+
 
     public int getId() {
         return id;
@@ -102,7 +116,7 @@ public class User {
         return weightKg;
     }
 
-    public void setWeightKg(double weightKg) {
+    public void setWeightKg(int weightKg) {
         this.weightKg = weightKg;
     }
 

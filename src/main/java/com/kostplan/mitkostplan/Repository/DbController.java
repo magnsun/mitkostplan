@@ -27,6 +27,17 @@ public class DbController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    public Optional <User> findByMail(String email){
+        String sql = "SELECT * FROM user WHERE email =?";
+        try {
+          User user = jdbcTemplate.queryForObject(sql, userRowMapper(), email);
+          return Optional.ofNullable(user);
+        } catch (EmptyResultDataAccessException e){
+            return Optional.empty();
+        }
+    }
+
     //Update item
     public void updateUser(User user) {
         try {
@@ -40,9 +51,9 @@ public class DbController {
     //Create item
     public void createUser(User user) throws SQLException {
         try{
-            String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, bmr, goal, subscribed) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal) VALUES (?,?,?,?,?,?,?,?)";
             jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm()+
-            user.getWeightKg(),user.getBmr(),user.getGoal(),user.isSubscribed());
+            user.getWeightKg(),user.getGoal());
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
         }
@@ -55,17 +66,6 @@ public class DbController {
             jdbcTemplate.update(sql, id);
         } catch (EmptyResultDataAccessException e) {
             System.out.println("error 404 ");
-        }
-    }
-
-    // Authenticate log in
-    public Boolean authenticateLogin(String email){
-        String sql = "SELECT password FROM User WHERE email = ?";
-        try {
-            String storedPassword = jdbcTemplate.queryForObject(sql, new Object[]{email}, String.class);
-            return storedPassword != null && storedPassword.equals(email);
-        }catch (EmptyResultDataAccessException e){
-            return false;
         }
     }
 
@@ -114,6 +114,25 @@ public class DbController {
                 recipe.setFat(rs.getInt("fat"));
                 recipe.setSugar(rs.getInt("sugar"));
                 return recipe;
+            };
+        }
+
+        private RowMapper<User> userRowMapper(){
+            return (rs, rowNum) -> {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setSex(rs.getByte("sex"));
+                user.setDateBirth(rs.getDate("dateBirth"));
+                user.setHeightCm(rs.getInt("heightCm"));
+                user.setWeightKg(rs.getInt("weightKg"));
+                user.setBmr(rs.getDouble("bmr"));
+                user.setGoal(rs.getByte("goal"));
+                user.setSubscribed(rs.getBoolean("subscribed"));
+
+                return user;
             };
         }
 
