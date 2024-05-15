@@ -142,4 +142,23 @@ public class User {
     public void setSubscribed(boolean subscribed) {
         this.subscribed = subscribed;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", sex=" + sex +
+                ", dateBirth=" + dateBirth +
+                ", heightCm=" + heightCm +
+                ", weightKg=" + weightKg +
+                ", bmr=" + bmr +
+                ", goal=" + goal +
+                ", subscribed=" + subscribed +
+                '}';
+    }
 }
+
+

@@ -45,6 +45,7 @@ public class UseCase {
 
     // Create user
     public void createUser(User user){
+        System.out.println("Hej");
         dbController.createUser(user);
     }
 

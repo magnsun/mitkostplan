@@ -54,9 +54,14 @@ public class UiController {
     @PostMapping("login/createUser")
     public String createUser(@ModelAttribute User user, BindingResult result){
         //If the email or password does not exist
+        System.out.println("777777777777777777777777777777777777777777777777");
+        /*
         if (result.hasErrors()){
             return "create";
         }
+
+         */
+        System.out.println("888888888888888888888888888888888888888");
         //makes the password harshed
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

@@ -25,7 +25,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/css/**", "/login", "/login/create").permitAll()
+                        .requestMatchers("/css/**", "/login", "/login/create", "/login/createUser").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
