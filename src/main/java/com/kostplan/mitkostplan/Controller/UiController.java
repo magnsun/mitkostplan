@@ -32,6 +32,17 @@ public class UiController {
         return "login";
     }
 
+    @GetMapping("main")
+    public String showMain(Model model){
+
+        return "main";
+    }
+
+    @GetMapping("/settings")
+    public String showSettings(){
+        return "settings";
+    }
+
     // Switch to update page
     @GetMapping("settings/update")
     public String switchUpdateMenu(Model model) {
@@ -54,14 +65,12 @@ public class UiController {
     @PostMapping("login/createUser")
     public String createUser(@ModelAttribute User user, BindingResult result){
         //If the email or password does not exist
-        System.out.println("777777777777777777777777777777777777777777777777");
         /*
         if (result.hasErrors()){
             return "create";
         }
 
          */
-        System.out.println("888888888888888888888888888888888888888");
         //makes the password harshed
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

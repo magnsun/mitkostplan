@@ -52,7 +52,6 @@ public class DbController {
     public void createUser(User user) {
         String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal) VALUES (?,?,?,?,?,?,?,?)";
         try{
-            System.out.println(user);
             jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm(), user.getWeightKg(),user.getGoal());
         } catch (DataAccessException e) {
             throw new RuntimeException("Error creating user: " + e.getMessage(), e);

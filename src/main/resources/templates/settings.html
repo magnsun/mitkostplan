@@ -8,11 +8,11 @@
 
 <h1>Settings</h1>
 
-<form action="#" th:action="@{/updatePage/updateUser}" th:object="${updateUser}" method="post">
+<form action="#" th:action="@{/settings/update}" th:object="${updateUser}" method="get">
 
-    <button type="submit">Update</button>
+    <button type="submit">Update info</button>
     <p></p>
-    <button type="submit">Back</button>
+    <a th:href="@{/main}">Back</a>
 
 </form>
 

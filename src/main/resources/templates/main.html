@@ -12,11 +12,11 @@
 
     <button type="submit">Recipes</button>
     <p></p>
-    <button type="submit">Settings</button>
+    <a th:href="@{/settings}">Settings</a>
     <p></p>
-    <button type="submit">Logout</button>
-
 </form>
-
+<form th:action="@{/main/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>
