@@ -29,7 +29,20 @@ class DbControllerTest {
 
     @Test
     public void testupdateUser()throws SQLException{
+        User user = new User();
+        user.setId(1);
+        user.setName("Nans");
+        user.setEmail("Nans112@mail.dk");
+        user.setPassword("1090");
+        user.setBmr(22.5);
+        user.setSex((byte) 2);
+        user.setDateBirth(Date.valueOf("1990-05-01"));
+        user.setHeightCm(186);
+        user.setWeightKg(25);
+        user.setGoal((byte)2);
 
+        assertNotNull(user);
+        assertNotEquals("Hans", user.getName());
     }
 
 
