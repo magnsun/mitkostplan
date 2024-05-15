@@ -17,6 +17,9 @@ class DbControllerTest {
     @Mock
     private JdbcTemplate jdbcTemplate;
 
+    @InjectMocks
+    private DbControllerTest dbControllerTest;
+
 
     @Test
     public void testgetAllRecipes() throws  SQLException{
@@ -38,12 +41,16 @@ class DbControllerTest {
         user.setName("Hans");
         user.setEmail("hans@mail.dk");
         user.setPassword("1230");
-        user.setBmr(Double.parseDouble("25,6"));
-        user.setSex(Byte.parseByte("Male"));
+        user.setBmr(25.6);
+        user.setSex((byte) 1);
         user.setDateBirth(Date.valueOf("2000-01-01"));
         user.setHeightCm(186);
         user.setWeightKg(75);
-        user.setGoal(Byte.parseByte("Gain"));
+        user.setGoal((byte)2);
+
+        assertNotNull(user);
+        assertEquals("Hans", user.getName());
+        assertEquals("hans@mail.dk", user.getEmail());
 
 
     }
