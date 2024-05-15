@@ -8,5 +8,15 @@
 
 <h1>Main</h1>
 
+<form action="#" th:action="@{/login/main}" th:object="${main}" method="post">
+
+    <button type="submit">Recipes</button>
+    <p></p>
+    <button type="submit">Settings</button>
+    <p></p>
+    <button type="submit">Logout</button>
+
+</form>
+
 </body>
 </html>
