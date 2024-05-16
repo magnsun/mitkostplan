@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/")
 public class UiController {
@@ -45,14 +48,21 @@ public class UiController {
 
     // Switch to update page
     @GetMapping("settings/update")
-    public String switchUpdateMenu(Model model) {
-        model.addAttribute("updateUser", new User());
+    public String switchUpdateMenu(Model model, Principal principal) {
+        //Get the logged-in users username(Email)
+        String username = principal.getName();
+
+        //get the user details
+        User user = useCase.getUserByMail(username);
+
+        model.addAttribute("updateUser", user);
         return "updatePage";
     }
 
     // Press the update button
     @PostMapping("updatePage/updateUser")
     public String updateUserButton(@ModelAttribute User user) {
+        System.out.println(user);
         useCase.updateUser(user);
         return "redirect:/settings";
     }
@@ -71,7 +81,7 @@ public class UiController {
         }
 
          */
-        //makes the password harshed
+        //makes the password hashed
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         useCase.createUser(user);

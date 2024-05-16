@@ -41,8 +41,8 @@ public class DbController {
     //Update item
     public void updateUser(User user) {
         try {
-            String sql = "UPDATE user set name = ?, email = ?, password = ?, sex = ?, datebirth = ?, heightcm = ?, weightKg = ?, bmr = ?, goal = ?, subscribed = ? where id = ?";
-            jdbcTemplate.update(sql, user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getBmr(), user.getGoal(), user.isSubscribed());
+            String sql = "UPDATE user set name = ?, sex = ?, datebirth = ?, heightcm = ?, weightKg = ?, goal = ? where email = ?";
+            jdbcTemplate.update(sql, user.getName(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getGoal(), user.getEmail());
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
         }

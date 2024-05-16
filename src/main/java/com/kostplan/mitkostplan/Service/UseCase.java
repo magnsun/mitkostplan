@@ -22,7 +22,7 @@ public class UseCase {
 
     //update items
     public void updateUser(User user) {
-        dbController.updateUser(user);
+       dbController.updateUser(user);
     }
 
     //delete items
@@ -31,8 +31,13 @@ public class UseCase {
     }
 
     //find item by x item
-    public Optional<User>findByMail(String email){
-          return dbController.findByMail(email);
+    public User getUserByMail(String email){
+        Optional<User>userOptional = dbController.findByMail(email);
+        if (userOptional.isPresent()){
+            return userOptional.get();
+        }else {
+            throw new RuntimeException("User not found");
+        }
     }
     public Optional<Recipe>getRecipe(int id){
         return dbController.getRecipe(id);
