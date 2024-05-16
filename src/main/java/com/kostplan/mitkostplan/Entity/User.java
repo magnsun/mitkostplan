@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 public class User {
@@ -54,6 +56,9 @@ public class User {
         this.subscribed = subscribed;
     }
 
+    public int getAge() {
+        return LocalDate.now().getYear() - getDateBirth().getYear() - 1900;
+    }
 
     public int getId() {
         return id;

@@ -50,12 +50,13 @@ public class DbController {
 
     //Create item
     public void createUser(User user) {
-        String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal, bmr) VALUES (?,?,?,?,?,?,?,?,?)";
         try{
-            jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm(), user.getWeightKg(),user.getGoal());
+            jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm(), user.getWeightKg(),user.getGoal(),user.getBmr());
         } catch (DataAccessException e) {
             throw new RuntimeException("Error creating user: " + e.getMessage(), e);
         }
+        System.out.println(user.getAge());
     }
 
     // Delete item

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +51,24 @@ public class UseCase {
 
     // Create user
     public void createUser(User user){
+        user.setBmr(calculateBMR(user));
         dbController.createUser(user);
+    }
+
+    public double calculateBMR(User user){
+
+        double bmr;
+        int age = user.getAge();
+
+        if (user.getSex() == 0) {
+            bmr = 88.362 + (13.397 * user.getWeightKg()) + (4.799 * user.getHeightCm()) - (5.677 * age);
+        } else if (user.getSex() == 1) {
+            bmr = 447.593 + (9.247 * user.getWeightKg()) + (3.098 * user.getHeightCm()) - (4.330 * age);
+        } else {
+            bmr = 359.239 + (4.15 * user.getWeightKg()) + (1.701 * user.getHeightCm()) - (1.347 * age);
+        }
+
+        return bmr;
     }
 
 }

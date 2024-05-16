@@ -43,6 +43,7 @@ class DbControllerTest {
 
         assertNotNull(user);
         assertNotEquals("Hans", user.getName());
+        assertEquals(1, user.getId());
     }
 
 
