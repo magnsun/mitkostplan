@@ -66,6 +66,8 @@ class DbControllerTest {
         assertEquals("Hans", user.getName());
         assertEquals("hans@mail.dk", user.getEmail());
 
+        System.out.println(user);
+
 
     }
 

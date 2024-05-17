@@ -6,8 +6,6 @@ import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,9 +43,9 @@ public class UseCase {
     }
 
     //get all items
-//    public List<User> getAllRecipes(){
-//        return dbController.getAllRecipes();
-//    }
+    public List<Recipe> getAllRecipes(){
+        return dbController.getAllRecipes();
+    }
 
     // Create user
     public void createUser(User user){
@@ -57,16 +55,14 @@ public class UseCase {
 
     public double calculateBMR(User user){
 
-        double bmr;
+        double bmr = 0;
         int age = user.getAge();
 
         if (user.getSex() == 0) {
-            bmr = 88.362 + (13.397 * user.getWeightKg()) + (4.799 * user.getHeightCm()) - (5.677 * age);
+            bmr = (10* user.getWeightKg())+(6.25*user.getHeightCm())-(5* user.getAge()+5);
         } else if (user.getSex() == 1) {
-            bmr = 447.593 + (9.247 * user.getWeightKg()) + (3.098 * user.getHeightCm()) - (4.330 * age);
-        } else {
-            bmr = 359.239 + (4.15 * user.getWeightKg()) + (1.701 * user.getHeightCm()) - (1.347 * age);
-        }
+            bmr = (10 * user.getWeightKg())+(6.25*user.getHeightCm())-(5* user.getAge())-161;
+        } 
 
         return bmr;
     }

@@ -1,7 +1,5 @@
 package com.kostplan.mitkostplan.Controller;
 import com.kostplan.mitkostplan.Entity.User;
-import com.kostplan.mitkostplan.Entity.Recipe;
-import com.kostplan.mitkostplan.Entity.Ingredient;
 import com.kostplan.mitkostplan.Service.UseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -86,5 +83,13 @@ public class UiController {
         user.setPassword(encodedPassword);
         useCase.createUser(user);
         return "redirect:/login";
+    }
+
+    @GetMapping("/recipes")
+    public String showAllRecipe(Model model){
+        model.addAttribute("recipes", useCase.getAllRecipes());
+
+
+        return "recipes";
     }
 }
