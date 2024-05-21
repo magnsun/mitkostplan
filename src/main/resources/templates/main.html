@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <link rel="stylesheet" href="/mainStyle.css">
 </head>
 <body>
 
 <h1>Main</h1>
 
-<div>
+<nav>
     <a th:href="@{/recipes}">recipes</a>
-</div>
-<div>
     <a th:href="@{/settings}">Settings</a>
-</div>
-<div>
     <form th:action="@{/main/logout}" method="post">
         <button type="submit">Logout</button>
     </form>
-</div>
-
+</nav>
 </body>
 </html>

@@ -21,6 +21,7 @@ public class UseCase {
 
     //update items
     public void updateUser(User user) {
+        user.calculateBMR();
         dbController.updateUser(user);
     }
 
@@ -54,22 +55,8 @@ public class UseCase {
 
     // Create user
     public void createUser(User user){
-        user.setBmr(calculateBMR(user));
+        user.calculateBMR();
         dbController.createUser(user);
-    }
-
-    public double calculateBMR(User user){
-
-        double bmr = 0;
-        int age = user.getAge();
-
-        if (user.getSex() == 0) {
-            bmr = (10* user.getWeightKg())+(6.25*user.getHeightCm())-(5* user.getAge()+5);
-        } else if (user.getSex() == 1) {
-            bmr = (10 * user.getWeightKg())+(6.25*user.getHeightCm())-(5* user.getAge())-161;
-        } 
-
-        return bmr;
     }
 
 }

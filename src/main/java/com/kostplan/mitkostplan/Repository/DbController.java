@@ -41,8 +41,8 @@ public class DbController {
     //Update item
     public void updateUser(User user) {
         try {
-            String sql = "UPDATE user set name = ?, sex = ?, datebirth = ?, heightcm = ?, weightKg = ?, goal = ?, activity = ? where email = ?";
-            jdbcTemplate.update(sql, user.getName(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getGoal(), user.getActivity(), user.getEmail());
+            String sql = "UPDATE user set name = ?, sex = ?, datebirth = ?, heightcm = ?, weightKg = ?, bmr = ?, goal = ?, activity = ? where email = ?";
+            jdbcTemplate.update(sql, user.getName(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getBmr(), user.getGoal(), user.getActivity(), user.getEmail());
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
         }
@@ -123,7 +123,7 @@ public class DbController {
                 user.setDateBirth(rs.getDate("dateBirth"));
                 user.setHeightCm(rs.getInt("heightCm"));
                 user.setWeightKg(rs.getInt("weightKg"));
-                user.setBmr(rs.getDouble("bmr"));
+                user.setBmr((int) rs.getDouble("bmr"));
                 user.setGoal(rs.getByte("goal"));
                 user.setActivity(rs.getByte("activity"));
                 user.setSubscribed(rs.getBoolean("subscribed"));

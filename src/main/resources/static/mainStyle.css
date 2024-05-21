@@ -1,0 +1,61 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9; /* Light green background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #388e3c; /* Dark green for the header */
+    margin-bottom: 20px;
+}
+
+nav {
+    background-color: #ffffff; /* White background for the nav */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #388e3c; /* Dark green for the links */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background-color: #388e3c; /* Dark green background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+nav form {
+    margin: 0;
+}
+
+nav button {
+    background-color: #66bb6a; /* Medium green for the button */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+nav button:hover {
+    background-color: #388e3c; /* Dark green on hover */
+}

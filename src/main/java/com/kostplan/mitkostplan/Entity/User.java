@@ -1,9 +1,6 @@
 package com.kostplan.mitkostplan.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 import java.sql.Date;
@@ -23,12 +20,13 @@ public class User {
     private Date dateBirth;
     private int heightCm;
     private int weightKg;
-    private double bmr;
+    private int bmr;
     private byte goal;
     private byte activity;
     private boolean subscribed;
 
     public User() {
+
     }
 
     public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, byte goal) {
@@ -41,9 +39,10 @@ public class User {
         this.heightCm = heightCm;
         this.weightKg = weightKg;
         this.goal = goal;
+        calculateBMR();
     }
 
-    public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, double bmr, byte goal, boolean subscribed) {
+    public User(int id, String name, String email, String password, byte sex, Date dateBirth, int heightCm, int weightKg, int bmr, byte goal, boolean subscribed) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -52,13 +51,56 @@ public class User {
         this.dateBirth = dateBirth;
         this.heightCm = heightCm;
         this.weightKg = weightKg;
-        this.bmr = bmr;
         this.goal = goal;
+        this.bmr = bmr;
         this.subscribed = subscribed;
+        calculateBMR();
+    }
+
+    public void calculateBMR(){
+        double baseBMR = 0.0;
+        if (getSex() == 0) {
+            baseBMR = (10* getWeightKg())+(6.25*getHeightCm())-(5* getAge()+5);
+        } else if (getSex() == 1) {
+            baseBMR = (10 * getWeightKg())+(6.25*getHeightCm())-(5*getAge())-161;
+        }
+        bmr = (int) (baseBMR*getActivityMultiplier()+regulateWithGoal());
+    }
+
+    private double getActivityMultiplier(){
+        switch (activity){
+            case 0:
+                return 1.2;
+            case 1:
+                return 1.5;
+            case 2:
+                return 1.7;
+            case 3:
+                return 1.9;
+            case 4:
+                return 2.4;
+            default:
+                return 1;
+        }
+    }
+
+    private int regulateWithGoal(){
+        switch (goal){
+            case 0:
+                return -500;
+            case 1:
+                return 500;
+            case 2:
+            default:
+                return 0;
+            case 3:
+                return 300;
+        }
     }
 
     public int getAge() {
-        return LocalDate.now().getYear() - getDateBirth().getYear() - 1900;
+        LocalDate birthDate = getDateBirth().toLocalDate();
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     public int getId() {
@@ -129,7 +171,7 @@ public class User {
         return bmr;
     }
 
-    public void setBmr(double bmr) {
+    public void setBmr(int bmr) {
         this.bmr = bmr;
     }
 
