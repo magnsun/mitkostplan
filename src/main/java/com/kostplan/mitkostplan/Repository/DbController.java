@@ -41,18 +41,27 @@ public class DbController {
     //Update item
     public void updateUser(User user) {
         try {
-            String sql = "UPDATE user set name = ?, sex = ?, datebirth = ?, heightcm = ?, weightKg = ?, goal = ? where email = ?";
-            jdbcTemplate.update(sql, user.getName(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getGoal(), user.getEmail());
+            String sql = "UPDATE user set name = ?, sex = ?, datebirth = ?, heightcm = ?, weightKg = ?, goal = ?, activity = ? where email = ?";
+            jdbcTemplate.update(sql, user.getName(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getGoal(), user.getActivity(), user.getEmail());
         } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void changeSub(User user){
+        try {
+            String sql = "UPDATE user SET subscribed = NOT (subscribed) WHERE email = ?";
+            jdbcTemplate.update(sql, user.getEmail());
+        } catch (DataAccessException e){
             throw new RuntimeException(e);
         }
     }
 
     //Create item
     public void createUser(User user) {
-        String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, goal, bmr) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO user (name, email, password, sex, dateBirth, heightCm, weightKg, bmr, goal, activity) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try{
-            jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm(), user.getWeightKg(),user.getGoal(),user.getBmr());
+            jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getSex(),user.getDateBirth(),user.getHeightCm(), user.getWeightKg(),user.getBmr(), user.getGoal(),user.getActivity());
         } catch (DataAccessException e) {
             throw new RuntimeException("Error creating user: " + e.getMessage(), e);
         }
@@ -60,26 +69,15 @@ public class DbController {
     }
 
     // Delete item
-    public void deleteUserById(int id) {
+    public void deleteUserByEmail(String email) {
         try {
-            String sql = "DELETE FROM User WHERE id =?";
-            jdbcTemplate.update(sql, id);
+            String sql = "DELETE FROM User WHERE email =?";
+            jdbcTemplate.update(sql, email);
         } catch (EmptyResultDataAccessException e) {
             System.out.println("error 404 ");
         }
     }
 
-    //changeSubscribtion
-    /*
-    public boolean changeSubscribtion(){
-        String sql = "SELECT subscribed FROM User WHERE id = ?";
-        try{
-            String storedSubscribtion = jdbcTemplate.queryForObject(sql, new Object[]{id}, String.class);
-            reture storedSubscribtion != null;
-        }catch (DataAccessException e){
-            reture false;
-        }
-    }*/
 
     //Get all Recipes
     public List<Recipe> getAllRecipes() {
@@ -109,10 +107,7 @@ public class DbController {
                 recipe.setId(rs.getInt("id"));
                 recipe.setName(rs.getString("Name"));
                 recipe.setMethod(rs.getString("Method"));
-                recipe.setProtein(rs.getInt("protein"));
                 recipe.setCalories(rs.getInt("calories"));
-                recipe.setFat(rs.getInt("fat"));
-                recipe.setSugar(rs.getInt("sugar"));
                 return recipe;
             };
         }
@@ -130,6 +125,7 @@ public class DbController {
                 user.setWeightKg(rs.getInt("weightKg"));
                 user.setBmr(rs.getDouble("bmr"));
                 user.setGoal(rs.getByte("goal"));
+                user.setActivity(rs.getByte("activity"));
                 user.setSubscribed(rs.getBoolean("subscribed"));
 
                 return user;

@@ -2,6 +2,8 @@ package com.kostplan.mitkostplan.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+
 @Entity
 public class Ingredient {
 
@@ -9,10 +11,14 @@ public class Ingredient {
     private int id;
     private String name;
     private int amount;
-
+    private int calories;
+    private int fat;
+    private int protein;
+    private int carbonhydrates;
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipeIngredients;
+
 
     public Ingredient() {
     }
@@ -41,11 +47,35 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public Recipe getRecipeIngredients() {
-        return recipeIngredients;
+    public int getCalories() {
+        return calories;
     }
 
-    public void setRecipeIngredients(Recipe recipeIngredients) {
-        this.recipeIngredients = recipeIngredients;
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public int getFat() {
+        return fat;
+    }
+
+    public void setFat(int fat) {
+        this.fat = fat;
+    }
+
+    public int getProtein() {
+        return protein;
+    }
+
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public int getCarbonhydrates() {
+        return carbonhydrates;
+    }
+
+    public void setCarbonhydrates(int carbonhydrates) {
+        this.carbonhydrates = carbonhydrates;
     }
 }

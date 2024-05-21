@@ -25,6 +25,7 @@ public class User {
     private int weightKg;
     private double bmr;
     private byte goal;
+    private byte activity;
     private boolean subscribed;
 
     public User() {
@@ -138,6 +139,14 @@ public class User {
 
     public void setGoal(byte goal) {
         this.goal = goal;
+    }
+
+    public byte getActivity() {
+        return activity;
+    }
+
+    public void setActivity(byte activity) {
+        this.activity = activity;
     }
 
     public boolean isSubscribed() {

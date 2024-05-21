@@ -55,6 +55,15 @@
         <option value="2">Maintain weight</option>
         <option value="3">Training</option>
     </select>
+
+    <label for="activity">Activity</label>
+    <select th:field="*{activity}" id="activity">
+        <option value="0">No or very little activiy</option>
+        <option value="1">1-2 times pr week</option>
+        <option value="2">3-5 times pr week</option>
+        <option value="3">6-7 times pr week</option>
+        <option value="4">1-2 times pr day</option>
+    </select>
     <br>
     <a th:href="@{/login}">Back</a>
     <br>

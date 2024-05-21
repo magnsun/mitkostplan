@@ -1,15 +1,15 @@
 package com.kostplan.mitkostplan.Controller;
 import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Service.UseCase;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -27,10 +27,15 @@ public class UiController {
     }
 
     @GetMapping("login")
-    public String showLoginForm(Model model){
+    public String showLoginForm(@RequestParam(value = "error", required = false) String error, Model model){
+        if (error != null){
+            model.addAttribute("loginError", "Invalid email or password");
+        }
+
         model.addAttribute("loginForm", new User());
         return "login";
     }
+
 
     @GetMapping("main")
     public String showMain(Model model){
@@ -39,7 +44,9 @@ public class UiController {
     }
 
     @GetMapping("/settings")
-    public String showSettings(){
+    public String showSettings(Model model, Principal principal){
+        User user = useCase.getUserByMail(principal.getName());
+        model.addAttribute("isSubscribed", user.isSubscribed());
         return "settings";
     }
 
@@ -56,11 +63,25 @@ public class UiController {
         return "updatePage";
     }
 
+    @PostMapping("settings/deleteUser")
+    public String deleteUser(Principal principal, HttpSession session){
+        String email = principal.getName();
+        useCase.deleteUserByEmail(email);
+        session.invalidate();
+        return "redirect:/main/logout";
+    }
+
     // Press the update button
     @PostMapping("updatePage/updateUser")
     public String updateUserButton(@ModelAttribute User user) {
         System.out.println(user);
         useCase.updateUser(user);
+        return "redirect:/settings";
+    }
+    @PostMapping("settings/subscribe")
+    public String changeSub(Principal principal){
+        User user = useCase.getUserByMail(principal.getName());
+        useCase.changeSub(user);
         return "redirect:/settings";
     }
     @GetMapping("login/create")

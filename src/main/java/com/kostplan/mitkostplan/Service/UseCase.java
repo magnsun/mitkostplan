@@ -21,12 +21,17 @@ public class UseCase {
 
     //update items
     public void updateUser(User user) {
-       dbController.updateUser(user);
+        dbController.updateUser(user);
     }
 
+    public void changeSub(User user){
+        dbController.changeSub(user);
+    }
+
+
     //delete items
-    public void deleteUserById(int id){
-        dbController.deleteUserById(id);
+    public void deleteUserByEmail(String email){
+        dbController.deleteUserByEmail(email);
     }
 
     //find item by x item

@@ -17,6 +17,9 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Password" required>
     </div>
+    <div th:if="${loginError}" class="alert invalidLogin">
+        <p th:text="${loginError}"> Invalid email or password. </p>
+    </div>
 
     <a th:href="@{/login/create}">Create user</a>
     <br>

@@ -8,13 +8,17 @@
 
 <h1>Settings</h1>
 
-<form action="#" th:action="@{/settings/update}" th:object="${updateUser}" method="get">
-
+<form action="#" th:action="@{/settings/update}" method="get">
     <button type="submit">Update info</button>
-    <p></p>
-    <a th:href="@{/main}">Back</a>
-
 </form>
+<form action="#" th:action="@{/settings/subscribe}" th:object="${changeSub}" method="post">
+    <button type="submit" th:text="${isSubscribed} ? 'Unsubscribe' : 'Subscribe'"></button>
+</form>
+<form action="#" th:action="@{/settings/deleteUser}" method="post">
+    <button type="submit" onclick="return confirm('Are you sure u want to delete this account?\nAll data wil be lost.');">Delete account</button>
+</form>
+
+<a th:href="@{/main}">Back</a>
 
 </body>
 </html>

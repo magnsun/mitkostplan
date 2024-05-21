@@ -8,15 +8,17 @@
 
 <h1>Main</h1>
 
-<form action="#" th:action="@{/login/main}" th:object="${main}" method="post">
-
-    <button type="submit">Recipes</button>
-    <p></p>
+<div>
+    <a th:href="@{/recipes}">recipes</a>
+</div>
+<div>
     <a th:href="@{/settings}">Settings</a>
-    <p></p>
-</form>
-<form th:action="@{/main/logout}" method="post">
-    <button type="submit">Logout</button>
-</form>
+</div>
+<div>
+    <form th:action="@{/main/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
 </body>
 </html>
