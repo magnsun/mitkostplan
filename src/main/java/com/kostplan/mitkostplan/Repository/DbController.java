@@ -106,6 +106,7 @@ public class DbController {
                 Recipe recipe = new Recipe();
                 recipe.setId(rs.getInt("id"));
                 recipe.setName(rs.getString("Name"));
+                recipe.setMealType(rs.getByte("mealType"));
                 recipe.setMethod(rs.getString("Method"));
                 recipe.setCalories(rs.getInt("calories"));
                 return recipe;

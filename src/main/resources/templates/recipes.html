@@ -7,10 +7,16 @@
 <body>
 <h1> Recipes </h1>
 
+<div>
+    <p>Name: <span th:text="${userInfo.name}"></span></p>
+    <p>Daily calorie intake: <span th:text="${userInfo.bmr}"></span></p>
+</div>
+
 <table>
     <thead>
         <tr>
             <th>   Name</th>
+            <th> Meal type</th>
             <th>  Calories</th>
             <th>    Protein</th>
         </tr>
@@ -18,6 +24,12 @@
     <tbody>
         <tr th:each="recipe : ${recipes} ">
             <td th:text = "${recipe.name}"></td>
+            <td>
+                <span th:if="${recipe.mealType == 0}" th:text="'Breakfast'"></span>
+                <span th:if="${recipe.mealType == 1}" th:text="'Lunch'"></span>
+                <span th:if="${recipe.mealType == 2}" th:text="'Dinner'"></span>
+                <span th:if="${recipe.mealType != 0 and recipe.mealType != 1 and recipe.mealType != 2}" th:text="'Unknown'"></span>
+            </td>
             <td th:text = "${recipe.calories}"> </td>
             <td th:text = "${recipe.protein}"> </td>
 

@@ -107,10 +107,10 @@ public class UiController {
     }
 
     @GetMapping("/recipes")
-    public String showAllRecipe(Model model){
+    public String showAllRecipe(Model model, Principal principal){
+        User user = useCase.getUserByMail(principal.getName());
+        model.addAttribute("userInfo", user);
         model.addAttribute("recipes", useCase.getAllRecipes());
-
-
         return "recipes";
     }
 }

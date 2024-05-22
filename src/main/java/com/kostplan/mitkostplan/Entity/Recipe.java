@@ -13,15 +13,17 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private byte mealType;
     private String method;
     private String protein;
     private int calories;
     @OneToMany(mappedBy = "recipeIngredients")
     private Set<Ingredient> ingredient;
 
-    public Recipe(int id, String name, String method, String protein, int calories, Set<Ingredient> ingredient) {
+    public Recipe(int id, String name, byte mealType, String method, String protein, int calories, Set<Ingredient> ingredient) {
         this.id = id;
         this.name = name;
+        this.mealType = mealType;
         this.method = method;
         this.protein = protein;
         this.calories = calories;
@@ -44,6 +46,14 @@ public class Recipe {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public byte getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(byte mealType) {
+        this.mealType = mealType;
     }
 
     public String getMethod() {
