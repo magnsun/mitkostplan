@@ -1,0 +1,72 @@
+/* recipes.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9; /* Light green background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #388e3c; /* Dark green for the header */
+    margin-bottom: 20px;
+}
+
+div {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+div p {
+    font-size: 18px;
+    color: #388e3c; /* Dark green for the text */
+    margin: 5px 0;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #66bb6a; /* Medium green for the header */
+    color: #ffffff; /* White text */
+}
+
+td {
+    background-color: #ffffff; /* White background for the cells */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light grey for alternating rows */
+}
+
+a {
+    text-decoration: none;
+    color: #388e3c; /* Dark green for the link */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px;
+}
+
+a:hover {
+    background-color: #388e3c; /* Dark green background on hover */
+    color: #ffffff; /* White text on hover */
+}

@@ -1,6 +1,8 @@
 package com.kostplan.mitkostplan.Service;
 
+import com.kostplan.mitkostplan.Entity.Ingredient;
 import com.kostplan.mitkostplan.Entity.Recipe;
+import com.kostplan.mitkostplan.Entity.RecipeIngredient;
 import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +46,18 @@ public class UseCase {
             throw new RuntimeException("User not found");
         }
     }
-    public Optional<Recipe>getRecipe(int id){
-        return dbController.getRecipe(id);
+    public Recipe getRecipe(int id) {
+        Optional<Recipe> optionalRecipe = dbController.getRecipe(id);
+        return optionalRecipe.orElse(null);
+    }
+
+    public Ingredient getIngredient(int id) {
+        Optional<Ingredient> optionalIngredient = dbController.getIngredient(id);
+        return optionalIngredient.orElse(null);
+    }
+
+    public List<RecipeIngredient>recipeIngredient(int recipeId){
+      return dbController.getRecipeIngredient(recipeId);
     }
 
     //get all items

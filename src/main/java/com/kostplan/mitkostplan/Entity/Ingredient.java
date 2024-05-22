@@ -2,28 +2,34 @@ package com.kostplan.mitkostplan.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 public class Ingredient {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int amount;
     private int calories;
     private int fat;
     private int protein;
-    private int carbonhydrates;
-    @ManyToOne
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipeIngredients;
-
+    private int carbohydrates;
+    @OneToMany(mappedBy = "ingredient")
+    private Set<RecipeIngredient>recipeIngredients;
 
     public Ingredient() {
     }
 
-    // up stilling af angving informson  af Ingredient
+    public Ingredient(int id, String name, int calories, int fat, int protein, int carbonhydrates, Set<RecipeIngredient> recipeIngredients) {
+        this.id = id;
+        this.name = name;
+        this.calories = calories;
+        this.fat = fat;
+        this.protein = protein;
+        this.carbohydrates = carbonhydrates;
+        this.recipeIngredients = recipeIngredients;
+    }
 
     public int getId() {
         return id;
@@ -39,14 +45,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public int getCalories() {
@@ -73,11 +71,32 @@ public class Ingredient {
         this.protein = protein;
     }
 
-    public int getCarbonhydrates() {
-        return carbonhydrates;
+    public int getCarbohydrates() {
+        return carbohydrates;
     }
 
-    public void setCarbonhydrates(int carbonhydrates) {
-        this.carbonhydrates = carbonhydrates;
+    public void setCarbohydrates(int carbonhydrates) {
+        this.carbohydrates = carbonhydrates;
+    }
+
+    public Set<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public void setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", calories=" + calories +
+                ", fat=" + fat +
+                ", protein=" + protein +
+                ", carbonhydrates=" + carbohydrates +
+                ", recipeIngredients=" + recipeIngredients +
+                '}';
     }
 }

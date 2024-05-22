@@ -1,0 +1,63 @@
+/* recipeInfoStyle.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9; /* Light green background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #388e3c; /* Dark green for the header */
+    margin-bottom: 20px;
+}
+
+div {
+    background-color: #ffffff; /* White background for the info box */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #388e3c; /* Dark green for the recipe name */
+    margin-top: 0;
+}
+
+p, li {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+}
+
+p strong {
+    color: #388e3c; /* Dark green for the strong text */
+}
+
+ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #388e3c; /* Dark green for the link */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px;
+}
+
+a:hover {
+    background-color: #388e3c; /* Dark green background on hover */
+    color: #ffffff; /* White text on hover */
+}

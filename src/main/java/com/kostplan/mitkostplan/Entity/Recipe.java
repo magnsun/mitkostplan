@@ -3,6 +3,7 @@ package com.kostplan.mitkostplan.Entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,23 +16,27 @@ public class Recipe {
     private String name;
     private byte mealType;
     private String method;
-    private String protein;
+    private int protein;
+    private int fat;
     private int calories;
-    @OneToMany(mappedBy = "recipeIngredients")
-    private Set<Ingredient> ingredient;
+    private int carbonhydrates;
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeIngredient> recipeIngredients;
 
-    public Recipe(int id, String name, byte mealType, String method, String protein, int calories, Set<Ingredient> ingredient) {
+    public Recipe() {
+    }
+
+    public Recipe(int id, String name, byte mealType, String method, int protein, int fat, int calories, int carbonhydrates, Set<RecipeIngredient> recipeIngredients) {
         this.id = id;
         this.name = name;
         this.mealType = mealType;
         this.method = method;
         this.protein = protein;
+        this.fat = fat;
         this.calories = calories;
-        this.ingredient = ingredient;
+        this.carbonhydrates = carbonhydrates;
+        this.recipeIngredients = recipeIngredients;
     }
-
-    // up stilling af angving informson  af Recipe
-    public Recipe() {}
 
     public int getId() {
         return id;
@@ -65,12 +70,20 @@ public class Recipe {
         this.method = method;
     }
 
-    public Set<Ingredient> getIngredient() {
-        return ingredient;
+    public int getProtein() {
+        return protein;
     }
 
-    public void setIngredient(Set<Ingredient> ingredient) {
-        this.ingredient = ingredient;
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public int getFat() {
+        return fat;
+    }
+
+    public void setFat(int fat) {
+        this.fat = fat;
     }
 
     public int getCalories() {
@@ -81,12 +94,20 @@ public class Recipe {
         this.calories = calories;
     }
 
-    public String getProtein() {
-        return protein;
+    public int getCarbonhydrates() {
+        return carbonhydrates;
     }
 
-    public void setProtein(String protein) {
-        this.protein = protein;
+    public void setCarbonhydrates(int carbonhydrates) {
+        this.carbonhydrates = carbonhydrates;
+    }
+
+    public Set<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public void setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
     @Override
@@ -94,10 +115,11 @@ public class Recipe {
         return "Recipe{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", mealType=" + mealType +
                 ", method='" + method + '\'' +
+                ", protein='" + protein + '\'' +
                 ", calories=" + calories +
-                ", ingredient=" + ingredient +
+                ", recipeIngredients=" + recipeIngredients +
                 '}';
     }
 }
-

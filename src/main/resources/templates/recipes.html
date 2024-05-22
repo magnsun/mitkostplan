@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
+    <link rel="stylesheet" href="/recipesStyle.css">
 </head>
 <body>
 <h1> Recipes </h1>
@@ -17,23 +18,18 @@
         <tr>
             <th>   Name</th>
             <th> Meal type</th>
-            <th>  Calories</th>
-            <th>    Protein</th>
+
         </tr>
     </thead>
     <tbody>
         <tr th:each="recipe : ${recipes} ">
-            <td th:text = "${recipe.name}"></td>
+            <td><a th:href="@{/recipes/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></td>
             <td>
                 <span th:if="${recipe.mealType == 0}" th:text="'Breakfast'"></span>
                 <span th:if="${recipe.mealType == 1}" th:text="'Lunch'"></span>
                 <span th:if="${recipe.mealType == 2}" th:text="'Dinner'"></span>
                 <span th:if="${recipe.mealType != 0 and recipe.mealType != 1 and recipe.mealType != 2}" th:text="'Unknown'"></span>
             </td>
-            <td th:text = "${recipe.calories}"> </td>
-            <td th:text = "${recipe.protein}"> </td>
-
-
         </tr>
     </tbody>
 </table>

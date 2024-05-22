@@ -99,6 +99,18 @@ public class User {
         }
     }
 
+    public int getBreakfastCalories(){
+        return (int) (bmr*0.4);
+    }
+
+    public int getLunchCalories(){
+        return (int) (bmr *0.3);
+    }
+
+    public int getDinnerCalories(){
+        return (int) (bmr * 0.3);
+    }
+
     // up stilling af angving informson  af User
 
     public int getAge() {

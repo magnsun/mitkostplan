@@ -1,0 +1,82 @@
+/* createStyle.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9; /* Light green background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 125vh;
+}
+
+h1 {
+    color: #388e3c; /* Dark green for the header */
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #ffffff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    color: #388e3c; /* Dark green for the labels */
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input:focus, select:focus {
+    border-color: #66bb6a; /* Medium green for focus */
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: #388e3c; /* Dark green for the link */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px;
+}
+
+a:hover {
+    background-color: #388e3c; /* Dark green background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+button {
+    background-color: #66bb6a; /* Medium green for the button */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #388e3c; /* Dark green on hover */
+}
