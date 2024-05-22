@@ -23,6 +23,8 @@ public class Ingredient {
     public Ingredient() {
     }
 
+    // up stilling af angving informson  af Ingredient
+
     public int getId() {
         return id;
     }

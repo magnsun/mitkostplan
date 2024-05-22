@@ -57,6 +57,7 @@ public class User {
         calculateBMR();
     }
 
+    //calculateBMR
     public void calculateBMR(){
         double baseBMR = 0.0;
         if (getSex() == 0) {
@@ -97,6 +98,8 @@ public class User {
                 return 300;
         }
     }
+
+    // up stilling af angving informson  af User
 
     public int getAge() {
         LocalDate birthDate = getDateBirth().toLocalDate();

@@ -30,6 +30,7 @@ public class Recipe {
         this.ingredient = ingredient;
     }
 
+    // up stilling af angving informson  af Recipe
     public Recipe() {}
 
     public int getId() {
