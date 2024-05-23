@@ -61,11 +61,11 @@ public class User {
     public void calculateBMR(){
         double baseBMR = 0.0;
         if (getSex() == 0) {
-            baseBMR = (10* getWeightKg())+(6.25*getHeightCm())-(5* getAge()+5);
+            baseBMR = (10 * getWeightKg()) + (6.25 * getHeightCm()) - (5 * getAge() + 5);
         } else if (getSex() == 1) {
-            baseBMR = (10 * getWeightKg())+(6.25*getHeightCm())-(5*getAge())-161;
+            baseBMR = (10 * getWeightKg()) + (6.25*getHeightCm()) - (5*getAge()) - 161;
         }
-        bmr = (int) (baseBMR*getActivityMultiplier()+regulateWithGoal());
+        bmr = (int) (baseBMR * getActivityMultiplier() + regulateWithGoal());
     }
 
     private double getActivityMultiplier(){

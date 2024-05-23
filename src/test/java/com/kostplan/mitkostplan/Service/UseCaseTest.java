@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UseCaseTest {
 
+    /* Her laver vi en test som, so beregner en brugers BMR, vi starter med at sætte en bruger op, men nogle givet data
+    * derefter udregner vi det med den algoritme givet til os af minkostplan og derefter laver vi et kontrol resultat */
+
     @Test
     void calculateBMRMale() {
 
@@ -30,13 +33,19 @@ class UseCaseTest {
         double bmrActive = bmr*1.7+300;
         System.out.println(bmrActive);
 
-        double bmrTest = (10*75) + (6.25*186) - (5 * 26) + 5;
+        double bmrTest = (10*75) + (6.25*186) - (5 * 24) + 5;
         System.out.println(bmr);
 
         double bmrQuietTest = bmrTest*1.2-500;
         System.out.println(bmrQuietTest);
         double bmrActiveTest = bmrTest*1.7+300;
         System.out.println(bmrActiveTest);
+
+        assertEquals(bmrTest,bmr);
+
+        assertEquals(bmrQuietTest, bmrQuiet);
+        assertEquals(bmrActiveTest, bmrActive);
+
 
     }
 

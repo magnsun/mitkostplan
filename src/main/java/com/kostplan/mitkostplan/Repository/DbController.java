@@ -21,7 +21,7 @@ public class DbController {
 
     private final JdbcTemplate jdbcTemplate;
 
-
+    //DbController for angane til db Wamp server
     @Autowired
     public DbController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -101,37 +101,35 @@ public class DbController {
     }
 
     // RowMapper
-        private RowMapper<Recipe> recipeRowMapper(){
-            return (rs, rowNum) -> {
-                Recipe recipe = new Recipe();
-                recipe.setId(rs.getInt("id"));
-                recipe.setName(rs.getString("Name"));
-                recipe.setMealType(rs.getByte("mealType"));
-                recipe.setMethod(rs.getString("Method"));
-                recipe.setCalories(rs.getInt("calories"));
-                return recipe;
-            };
-        }
+    private RowMapper<Recipe> recipeRowMapper(){
+        return (rs, rowNum) -> {
+            Recipe recipe = new Recipe();
+            recipe.setId(rs.getInt("id"));
+            recipe.setName(rs.getString("Name"));
+            recipe.setMealType(rs.getByte("mealType"));
+            recipe.setMethod(rs.getString("Method"));
+            recipe.setCalories(rs.getInt("calories"));
+            return recipe;
+        };
+    }
 
-        private RowMapper<User> userRowMapper(){
-            return (rs, rowNum) -> {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setSex(rs.getByte("sex"));
-                user.setDateBirth(rs.getDate("dateBirth"));
-                user.setHeightCm(rs.getInt("heightCm"));
-                user.setWeightKg(rs.getInt("weightKg"));
-                user.setBmr((int) rs.getDouble("bmr"));
-                user.setGoal(rs.getByte("goal"));
-                user.setActivity(rs.getByte("activity"));
-                user.setSubscribed(rs.getBoolean("subscribed"));
+    private RowMapper<User> userRowMapper(){
+        return (rs, rowNum) -> {
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setName(rs.getString("name"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+            user.setSex(rs.getByte("sex"));
+            user.setDateBirth(rs.getDate("dateBirth"));
+            user.setHeightCm(rs.getInt("heightCm"));
+            user.setWeightKg(rs.getInt("weightKg"));
+            user.setBmr((int) rs.getDouble("bmr"));
+            user.setGoal(rs.getByte("goal"));
+            user.setActivity(rs.getByte("activity"));
+            user.setSubscribed(rs.getBoolean("subscribed"));
 
-                return user;
-            };
-        }
-
-
+            return user;
+        };
+    }
 }

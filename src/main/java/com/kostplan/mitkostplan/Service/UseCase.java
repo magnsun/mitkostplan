@@ -44,6 +44,7 @@ public class UseCase {
             throw new RuntimeException("User not found");
         }
     }
+
     public Optional<Recipe>getRecipe(int id){
         return dbController.getRecipe(id);
     }
@@ -57,6 +58,25 @@ public class UseCase {
     public void createUser(User user){
         user.calculateBMR();
         dbController.createUser(user);
+    }
+
+    // Do not make unit test of this
+    public void getUserRecipes(User user){
+        double bmr = user.getBmr();
+
+        double breakfastCalories = bmr * 0.4;
+        double lunchCalories = bmr * 0.3;
+        double dinnerCalories = bmr * 0.3;
+
+    }
+
+    // Do not make unit test of this
+    public double calculateAmountOfIngredient(double gramOfIngredient, double nutritionPr100Gram, double sumOfNutritionPr100Gram, double customersRequiredNutrition) {
+        double requiredAmountOfIngredient;
+
+        requiredAmountOfIngredient = 100 * (((nutritionPr100Gram / 100 * gramOfIngredient) / sumOfNutritionPr100Gram * 100) * customersRequiredNutrition);
+
+        return requiredAmountOfIngredient;
     }
 
 }
