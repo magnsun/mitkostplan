@@ -1,5 +1,6 @@
 package com.kostplan.mitkostplan.Repository;
 
+import com.kostplan.mitkostplan.Entity.RecipeIngredient;
 import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Entity.Recipe;
 import com.kostplan.mitkostplan.Entity.Ingredient;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +47,14 @@ public class DbController {
             jdbcTemplate.update(sql, user.getName(), user.getSex(), user.getDateBirth(), user.getHeightCm(), user.getWeightKg(), user.getBmr(), user.getGoal(), user.getActivity(), user.getEmail());
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public List<RecipeIngredient> getRecipeIngredient(int recipeId){
+        String sql = "SELECT * FROM recipeingredients where recipeId=?";
+        try {
+            return jdbcTemplate.query(sql, recipeIngredientRowMapper(), recipeId);
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
         }
     }
 
@@ -100,6 +110,17 @@ public class DbController {
         }
     }
 
+    // get ingredient
+    public Optional<Ingredient> getIngredient(int id){
+        String sql = "SELECT * FROM ingredient WHERE id=?";
+        try{
+            Ingredient ingredient = jdbcTemplate.queryForObject(sql, ingredientRowMapper(), id);
+            return Optional.ofNullable(ingredient);
+        }catch (EmptyResultDataAccessException e){
+            return Optional.empty();
+        }
+    }
+
     // RowMapper
         private RowMapper<Recipe> recipeRowMapper(){
             return (rs, rowNum) -> {
@@ -146,6 +167,15 @@ public class DbController {
                 return user;
             };
         }
-
+    private RowMapper<RecipeIngredient> recipeIngredientRowMapper(){
+        return (rs, rowNum) -> {
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            recipeIngredient.setId(rs.getInt("id"));
+            recipeIngredient.setQuantity(rs.getInt("quantity"));
+            recipeIngredient.setRecipe(getRecipe(rs.getInt("recipeId")).orElse(null));
+            recipeIngredient.setIngredient(getIngredient(rs.getInt("ingredientId")).orElse(null));
+            return recipeIngredient;
+        };
+    }
 
 }

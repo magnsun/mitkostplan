@@ -1,13 +1,19 @@
 package com.kostplan.mitkostplan.Service;
 
+import com.kostplan.mitkostplan.Controller.RecipeController;
+import com.kostplan.mitkostplan.Entity.Ingredient;
 import com.kostplan.mitkostplan.Entity.Recipe;
+import com.kostplan.mitkostplan.Entity.RecipeIngredient;
 import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
+import java.util.HashMap;
 
 @Service
 public class UseCase {
@@ -18,7 +24,7 @@ public class UseCase {
     public UseCase(DbController dbController){
         this.dbController = dbController;
     }
-
+    private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
     //update items
     public void updateUser(User user) {
         user.calculateBMR();
@@ -106,6 +112,7 @@ public class UseCase {
         LOGGER.info("Adjusted ingredients: " + adjustedIngredients);
         return adjustedIngredients;
   }
+
     // Do not make unit test of this
     public void getUserRecipes(User user){
         double bmr = user.getBmr();
