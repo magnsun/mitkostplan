@@ -74,7 +74,7 @@ public class UseCase {
     }
 
     // Do not make unit test of this
-  public Map<RecipeIngredient, Integer> calculateAdjustedRecipe(Recipe recipe, User user){
+  public Map<RecipeIngredient, Integer> calculateIngredientAmount(Recipe recipe, User user){
 
         LOGGER.info("Calculating adjusted recipe for Recipe ID: " + recipe.getId() + " and User ID: " + user.getId());
 
@@ -110,4 +110,22 @@ public class UseCase {
         LOGGER.info("Adjusted ingredients: " + adjustedIngredients);
         return adjustedIngredients;
   }
+    // Do not make unit test of this
+    public void getUserRecipes(User user){
+        double bmr = user.getBmr();
+
+        double breakfastCalories = bmr * 0.4;
+        double lunchCalories = bmr * 0.3;
+        double dinnerCalories = bmr * 0.3;
+
+    }
+
+    // Do not make unit test of this
+    public double calculateAmountOfIngredient(double gramOfIngredient, double nutritionPr100Gram, double sumOfNutritionPr100Gram, double customersRequiredNutrition) {
+        double requiredAmountOfIngredient;
+
+        requiredAmountOfIngredient = 100 * (((nutritionPr100Gram / 100 * gramOfIngredient) / sumOfNutritionPr100Gram * 100) * customersRequiredNutrition);
+
+        return requiredAmountOfIngredient;
+    }
 }

@@ -40,7 +40,7 @@ public class RecipeController {
     public String recipeInfo(Model model, @PathVariable int id, Principal principal){
         User user = useCase.getUserByMail(principal.getName());
         Recipe recipe = useCase.getRecipe(id);
-        Map<RecipeIngredient, Integer> adjustedIngredients = useCase.calculateAdjustedRecipe(recipe, user);
+        Map<RecipeIngredient, Integer> adjustedIngredients = useCase.calculateIngredientAmount(recipe, user);
 
         for (Map.Entry<RecipeIngredient, Integer> entry : adjustedIngredients.entrySet()){
             RecipeIngredient ingredient = entry.getKey();
