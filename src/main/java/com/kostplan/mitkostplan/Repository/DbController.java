@@ -1,6 +1,5 @@
 package com.kostplan.mitkostplan.Repository;
 
-import com.kostplan.mitkostplan.Entity.RecipeIngredient;
 import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Entity.Recipe;
 import com.kostplan.mitkostplan.Entity.Ingredient;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,51 +78,26 @@ public class DbController {
         }
     }
 
+
+    //Get all Recipes
     public List<Recipe> getAllRecipes() {
-        String sql = "SELECT * FROM recipe";
-        return jdbcTemplate.query(sql, recipeRowMapper());
+        try {
+            String sql = "SELECT * FROM recipe";
+            return jdbcTemplate.query(sql, recipeRowMapper());
+        }catch (EmptyResultDataAccessException e){
+            return null;
+    }
     }
 
     // get recipe
     public Optional<Recipe> getRecipe(int id){
         String sql = "SELECT * FROM recipe WHERE id=?";
         try{
-            Recipe recipe = jdbcTemplate.queryForObject(sql, recipeRowMapper(), id);
+            Recipe recipe = jdbcTemplate.queryForObject(sql, new Object[]{id}, recipeRowMapper());
             return Optional.ofNullable(recipe);
         }catch (EmptyResultDataAccessException e){
             return Optional.empty();
         }
-    }
-
-    // get ingredient
-    public Optional<Ingredient> getIngredient(int id){
-        String sql = "SELECT * FROM ingredient WHERE id=?";
-        try{
-            Ingredient ingredient = jdbcTemplate.queryForObject(sql, ingredientRowMapper(), id);
-            return Optional.ofNullable(ingredient);
-        }catch (EmptyResultDataAccessException e){
-            return Optional.empty();
-        }
-    }
-
-    public List<RecipeIngredient> getRecipeIngredient(int recipeId){
-        String sql = "SELECT * from recipeingredients where recipeId=?";
-        try {
-           return jdbcTemplate.query(sql, recipeIngredientRowMapper(), recipeId);
-        }catch (EmptyResultDataAccessException e){
-            return new ArrayList<>();
-        }
-    }
-
-    private RowMapper<RecipeIngredient> recipeIngredientRowMapper(){
-        return (rs, rowNum) -> {
-            RecipeIngredient recipeIngredient = new RecipeIngredient();
-            recipeIngredient.setId(rs.getInt("id"));
-            recipeIngredient.setQuantity(rs.getInt("quantity"));
-            recipeIngredient.setRecipe(getRecipe(rs.getInt("recipeId")).orElse(null));
-            recipeIngredient.setIngredient(getIngredient(rs.getInt("ingredientId")).orElse(null));
-            return recipeIngredient;
-        };
     }
 
     // RowMapper

@@ -1,19 +1,14 @@
 package com.kostplan.mitkostplan.Entity;
 
-import com.kostplan.mitkostplan.Controller.RecipeController;
 import jakarta.persistence.*;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
 
 @Entity
 public class User {
-
-    private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,19 +102,6 @@ public class User {
             case 3:
                 return 300;
         }
-    }
-
-
-    public Map<Byte, Double> splitDailyCalories(){
-        Map<Byte, Double> mealCalories = new HashMap<>();
-        mealCalories.put((byte) 0, adjustCaloriesForGoal()*0.4);
-        mealCalories.put((byte) 1, adjustCaloriesForGoal()*0.3);
-        mealCalories.put((byte) 2, adjustCaloriesForGoal()*0.3);
-
-        LOGGER.info("dailu calories is: " + bmr);
-        LOGGER.info("Split Daily Calories: " + mealCalories);
-
-        return mealCalories;
     }
 
     // up stilling af angving informson  af User

@@ -1,23 +1,19 @@
 package com.kostplan.mitkostplan.Service;
 
-import com.kostplan.mitkostplan.Controller.RecipeController;
-import com.kostplan.mitkostplan.Entity.Ingredient;
 import com.kostplan.mitkostplan.Entity.Recipe;
-import com.kostplan.mitkostplan.Entity.RecipeIngredient;
 import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.*;
-import java.util.logging.Logger;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UseCase {
 
     private final DbController dbController;
-    private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
+
     @Autowired
     public UseCase(DbController dbController){
         this.dbController = dbController;

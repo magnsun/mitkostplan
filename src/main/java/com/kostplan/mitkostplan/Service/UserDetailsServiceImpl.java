@@ -22,6 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final DbController dbController;
 
+    // details of the user that kan be seen in HTML
     @Autowired
     public UserDetailsServiceImpl(DbController dbController) {
         this.dbController = dbController;
@@ -32,6 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorities;
     }
+
+    //to find user inform form load username
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
