@@ -1,61 +1,83 @@
-/* styles.css */
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #e8f5e9; /* Light green background */
-    margin: 0;
-    padding: 0;
+    background:  #e8f5e9;
+    color: #333;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
-h1 {
-    color: #388e3c; /* Dark green for the header */
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 600px;
+}
+
+header {
     margin-bottom: 20px;
 }
 
-nav {
-    background-color: #ffffff; /* White background for the nav */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+h1 {
+    font-size: 24px;
+    color: #4CAF50;
+}
+
+h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.menu {
     display: flex;
-    gap: 20px;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.menu-item, .logout-button {
+    display: flex;
     align-items: center;
-}
-
-nav a {
+    justify-content: center;
+    background: #4CAF50;
+    color: white;
     text-decoration: none;
-    color: #388e3c; /* Dark green for the links */
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+    flex: 1;
 }
 
-nav a:hover {
-    background-color: #388e3c; /* Dark green background on hover */
-    color: #ffffff; /* White text on hover */
+.menu-item img, .logout-button img {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
 }
 
-nav form {
-    margin: 0;
+.logout-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
-nav button {
-    background-color: #66bb6a; /* Medium green for the button */
-    color: #ffffff; /* White text */
+.logout-button {
     border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-nav button:hover {
-    background-color: #388e3c; /* Dark green on hover */
+.menu-item:hover, .logout-button:hover {
+    background: #45a049;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777;
 }

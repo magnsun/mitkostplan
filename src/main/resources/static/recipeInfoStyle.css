@@ -15,7 +15,17 @@ h1 {
     margin-bottom: 20px;
 }
 
-div {
+.recipe-info {
+    background-color: #ffffff; /* White background for the info box */
+    padding: 25px; /* Increased padding */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.method{
     background-color: #ffffff; /* White background for the info box */
     padding: 25px; /* Increased padding */
     border-radius: 8px;
@@ -49,7 +59,7 @@ p.method-step {
     margin: 10px 0; /* Increased margin for method steps */
 }
 
-a {
+a.back-link {
     text-decoration: none;
     color: #388e3c; /* Dark green for the link */
     font-weight: bold;
@@ -59,7 +69,7 @@ a {
     margin-top: 20px;
 }
 
-a:hover {
+a.back-link:hover {
     background-color: #388e3c; /* Dark green background on hover */
     color: #ffffff; /* White text on hover */
 }

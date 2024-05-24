@@ -6,10 +6,8 @@
     <link rel="stylesheet" href="/recipeInfoStyle.css">
 </head>
 <body>
-<h1>Recipe Info</h1>
-
-<div>
-    <h2 th:text="${recipe.name}"></h2>
+<div class="recipe-info">
+    <h1 th:text="${recipe.name}"></h1>
     <p><strong>Meal Type:</strong>
         <span th:if="${recipe.mealType == 0}" th:text="'Breakfast'"></span>
         <span th:if="${recipe.mealType == 1}" th:text="'Lunch'"></span>
@@ -24,16 +22,18 @@
         </li>
     </ul>
 
+
     <p><strong>Method:</strong></p>
-    <div th:utext="${formattedMethod}"></div>
+    <div class="method" th:utext="${formattedMethod}"></div>
 
     <p><strong>Calories:</strong> <span th:text="${recipe.calories}"></span></p>
     <p><strong>Fat:</strong> <span th:text="${recipe.fat}"></span></p>
     <p><strong>Protein:</strong> <span th:text="${recipe.protein}"></span></p>
     <p><strong>Carbohydrates:</strong> <span th:text="${recipe.carbonhydrates}"></span></p>
-</div>
 
-<a th:href="@{/recipes}">Back to Recipes</a>
+
+</div>
+<a th:href="@{/recipes}" class="back-link">Back to Recipes</a>
 
 </body>
 </html>
