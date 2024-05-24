@@ -1,5 +1,6 @@
 package com.kostplan.mitkostplan.Service;
 
+import com.kostplan.mitkostplan.Controller.RecipeController;
 import com.kostplan.mitkostplan.Entity.Ingredient;
 import com.kostplan.mitkostplan.Entity.Recipe;
 import com.kostplan.mitkostplan.Entity.RecipeIngredient;
@@ -7,15 +8,16 @@ import com.kostplan.mitkostplan.Entity.User;
 import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.logging.Logger;
 
 @Service
 public class UseCase {
 
     private final DbController dbController;
-
+    private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
     @Autowired
     public UseCase(DbController dbController){
         this.dbController = dbController;
@@ -71,4 +73,41 @@ public class UseCase {
         dbController.createUser(user);
     }
 
+    // Do not make unit test of this
+  public Map<RecipeIngredient, Integer> calculateAdjustedRecipe(Recipe recipe, User user){
+
+        LOGGER.info("Calculating adjusted recipe for Recipe ID: " + recipe.getId() + " and User ID: " + user.getId());
+
+        Map<Byte, Double> mealCalories = user.splitDailyCalories();
+        double mealTypeCalories = mealCalories.get(recipe.getMealType());
+
+        LOGGER.info("mealType Calories: " + mealTypeCalories);
+
+        double totalRecipeCalories = 0;
+
+
+        List<RecipeIngredient> ingredientList = dbController.getRecipeIngredient(recipe.getId());
+
+        for (RecipeIngredient recipeIngredient : ingredientList){
+            double gramOfIngredient = recipeIngredient.getQuantity();
+            double caloriesPer100Gram = recipeIngredient.getIngredient().getCalories();
+            totalRecipeCalories += (caloriesPer100Gram/100)*gramOfIngredient;
+        }
+
+        LOGGER.info("Total Recipe Calories: " + totalRecipeCalories);
+
+        double scaleFactor = mealTypeCalories/totalRecipeCalories;
+
+        LOGGER.info("Scale Factor: " + scaleFactor);
+
+        Map<RecipeIngredient, Integer> adjustedIngredients = new HashMap<>();
+
+        for (RecipeIngredient ingredient : ingredientList){
+            double originalQuantity = ingredient.getQuantity();
+            double adjustedQuantity = originalQuantity * scaleFactor;
+            adjustedIngredients.put(ingredient, (int) adjustedQuantity);
+        }
+        LOGGER.info("Adjusted ingredients: " + adjustedIngredients);
+        return adjustedIngredients;
+  }
 }

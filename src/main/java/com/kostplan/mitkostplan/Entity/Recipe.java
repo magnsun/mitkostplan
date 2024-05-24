@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "recipe")
 public class Recipe {
 
     @Id
@@ -37,6 +36,12 @@ public class Recipe {
         this.carbonhydrates = carbonhydrates;
         this.recipeIngredients = recipeIngredients;
     }
+
+    public int calorieIntakeForIngredient(int caloriePr100Gram, int requiredIngredientAmount){
+        return caloriePr100Gram/100 * requiredIngredientAmount;
+    }
+
+
 
     public int getId() {
         return id;
@@ -116,7 +121,6 @@ public class Recipe {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mealType=" + mealType +
-                ", method='" + method + '\'' +
                 ", protein='" + protein + '\'' +
                 ", calories=" + calories +
                 ", recipeIngredients=" + recipeIngredients +

@@ -29,6 +29,8 @@ public class RecipeIngredient {
         this.quantity = quantity;
     }
 
+
+
     public int getId() {
         return id;
     }
@@ -59,5 +61,15 @@ public class RecipeIngredient {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeIngredient{" +
+                "id=" + id +
+                ", recipe=" + recipe +
+                ", ingredient=" + ingredient +
+                ", quantity=" + quantity +
+                '}';
     }
 }

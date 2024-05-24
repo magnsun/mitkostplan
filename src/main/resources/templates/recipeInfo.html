@@ -14,20 +14,24 @@
         <span th:if="${recipe.mealType == 0}" th:text="'Breakfast'"></span>
         <span th:if="${recipe.mealType == 1}" th:text="'Lunch'"></span>
         <span th:if="${recipe.mealType == 2}" th:text="'Dinner'"></span>
+    </p>
 
     <h3>Ingredients:</h3>
     <ul>
-        <li th:each="ingredient : ${recipeIngredient}" th:text="${ingredient.quantity + ' ' + ingredient.ingredient.name}"></li>
+        <li th:each="ingredient : ${adjustedIngredients}">
+            <span th:text="${ingredient.key.ingredient.name}"></span>:
+            <span th:text="${ingredient.value}"></span> grams
+        </li>
     </ul>
 
-    <p><strong>Method:</strong> <span th:text="${recipe.method}"></span></p>
+    <p><strong>Method:</strong></p>
+    <div th:utext="${formattedMethod}"></div>
+
     <p><strong>Calories:</strong> <span th:text="${recipe.calories}"></span></p>
     <p><strong>Fat:</strong> <span th:text="${recipe.fat}"></span></p>
     <p><strong>Protein:</strong> <span th:text="${recipe.protein}"></span></p>
     <p><strong>Carbohydrates:</strong> <span th:text="${recipe.carbonhydrates}"></span></p>
 </div>
-
-
 
 <a th:href="@{/recipes}">Back to Recipes</a>
 

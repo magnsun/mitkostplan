@@ -1,5 +1,3 @@
-/* recipeInfoStyle.css */
-
 body {
     font-family: Arial, sans-serif;
     background-color: #e8f5e9; /* Light green background */
@@ -19,7 +17,7 @@ h1 {
 
 div {
     background-color: #ffffff; /* White background for the info box */
-    padding: 20px;
+    padding: 25px; /* Increased padding */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 80%;
@@ -45,6 +43,10 @@ p strong {
 ul {
     padding-left: 20px;
     margin: 10px 0;
+}
+
+p.method-step {
+    margin: 10px 0; /* Increased margin for method steps */
 }
 
 a {

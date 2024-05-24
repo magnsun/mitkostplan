@@ -1,14 +1,19 @@
 package com.kostplan.mitkostplan.Entity;
 
+import com.kostplan.mitkostplan.Controller.RecipeController;
 import jakarta.persistence.*;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @Entity
 public class User {
+
+    private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,14 +63,19 @@ public class User {
     }
 
     //calculateBMR
-    public void calculateBMR(){
-        double baseBMR = 0.0;
-        if (getSex() == 0) {
-            baseBMR = (10* getWeightKg())+(6.25*getHeightCm())-(5* getAge()+5);
-        } else if (getSex() == 1) {
-            baseBMR = (10 * getWeightKg())+(6.25*getHeightCm())-(5*getAge())-161;
+    public double calculateBMR(){
+        double baseBMR;
+        if (sex == 0) {
+            baseBMR = (10* weightKg)+(6.25*heightCm)-(5* getAge())+5;
+        } else{
+            baseBMR = (10 * weightKg)+(6.25*heightCm)-(5*getAge())-161;
         }
-        bmr = (int) (baseBMR*getActivityMultiplier()+regulateWithGoal());
+        bmr = (int) (baseBMR*getActivityMultiplier());
+        return bmr;
+    }
+
+    public double adjustCaloriesForGoal(){
+        return calculateBMR() + regulateWithGoal();
     }
 
     private double getActivityMultiplier(){
@@ -99,16 +109,17 @@ public class User {
         }
     }
 
-    public int getBreakfastCalories(){
-        return (int) (bmr*0.4);
-    }
 
-    public int getLunchCalories(){
-        return (int) (bmr *0.3);
-    }
+    public Map<Byte, Double> splitDailyCalories(){
+        Map<Byte, Double> mealCalories = new HashMap<>();
+        mealCalories.put((byte) 0, adjustCaloriesForGoal()*0.4);
+        mealCalories.put((byte) 1, adjustCaloriesForGoal()*0.3);
+        mealCalories.put((byte) 2, adjustCaloriesForGoal()*0.3);
 
-    public int getDinnerCalories(){
-        return (int) (bmr * 0.3);
+        LOGGER.info("dailu calories is: " + bmr);
+        LOGGER.info("Split Daily Calories: " + mealCalories);
+
+        return mealCalories;
     }
 
     // up stilling af angving informson  af User
