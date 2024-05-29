@@ -127,7 +127,7 @@ public class UseCase {
     public double calculateAmountOfIngredient(double gramOfIngredient, double nutritionPr100Gram, double sumOfNutritionPr100Gram, double customersRequiredNutrition) {
         double requiredAmountOfIngredient;
 
-        requiredAmountOfIngredient = 100 * (((nutritionPr100Gram / 100 * gramOfIngredient) / sumOfNutritionPr100Gram * 100) * customersRequiredNutrition);
+        requiredAmountOfIngredient = 100 * ((((nutritionPr100Gram / 100) * gramOfIngredient) / sumOfNutritionPr100Gram * 100) * customersRequiredNutrition);
 
         return requiredAmountOfIngredient;
     }
