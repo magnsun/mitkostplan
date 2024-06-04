@@ -112,6 +112,7 @@ public class UseCase {
         LOGGER.info("Adjusted ingredients: " + adjustedIngredients);
         return adjustedIngredients;
   }
+  
 
     // Do not make unit test of this
     public void getUserRecipes(User user){

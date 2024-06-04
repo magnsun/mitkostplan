@@ -52,13 +52,38 @@ class UseCaseTest {
     @Test
     void calculateBMRFemale() {
 
-        double bmr = (10*70) + (6.25*175) - (5 * 26) - 161;
+        User user = new User();
+        user.setName("Lise");
+        user.setEmail("Lise@mail.dk");
+        user.setPassword("1234");
+
+        user.setSex((byte)0);
+        user.setDateBirth(Date.valueOf("2000-01-01"));
+        user.setHeightCm(175);
+        user.setWeightKg(70);
+        user.setGoal((byte) 2);
+
+        double bmr = (10*user.getWeightKg())+(6.25*user.getHeightCm())-(5*user.getAge()) - 161;
         System.out.println(bmr);
 
-        double bmrquiet = bmr*1.2-500;
-        System.out.println(bmrquiet);
-        double bmractive = bmr*1.7+300;
-        System.out.println(bmractive);
+        double bmrQuiet = bmr*1.2-500;
+        System.out.println(bmrQuiet);
+        double bmrActive = bmr*1.7+300;
+        System.out.println(bmrActive);
+
+        double bmrTest = (10*70) + (6.25*175) - (5 * 24) - 161;
+        System.out.println(bmrTest);
+
+        double bmrTestQuiet = bmrTest*1.2-500;
+        System.out.println(bmrTestQuiet);
+        double bmrTestActive = bmrTest*1.7+300;
+        System.out.println(bmrTestActive);
+
+        assertEquals(bmrTest,bmr);
+
+        assertEquals(bmrTestQuiet, bmrQuiet);
+        assertEquals(bmrTestActive, bmrActive);
+
 
     }
     @Test
