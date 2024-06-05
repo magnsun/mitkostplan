@@ -25,10 +25,21 @@ public class RecipeController {
     private final UseCase useCase;
     private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
 
+    /*
+    Skal undersøges
+     */
     @Autowired
     private RecipeController(UseCase useCase){
         this.useCase = useCase;
     }
+
+    /*
+    Principal objektet er en del af spring security hvilket husker hvilken bruger som er logget ind
+    Et User objekt bliver oprettet med getUserByMail metoden fra UseCase klassen med principal værdien til at finde brugeren
+    model.addAttribute giver så User objektets information til "userInfo" pladsen i recipes.html
+    Den bruger så getAllRecipes metoden fra UseCase klassen til at få et list objekt som indenholder
+    alle obskrifter fra vores database og sætter dem i "recipes" pladsen i recipes.html filen
+     */
     @GetMapping()
     public String showAllRecipe(Model model, Principal principal){
         User user = useCase.getUserByMail(principal.getName());
@@ -36,6 +47,18 @@ public class RecipeController {
         model.addAttribute("recipes", useCase.getAllRecipes());
         return "recipes";
     }
+
+    /*
+    @GetMapping("/recipe/{id}") dette gør at vores url er anderledes basseret på opskriften
+    @PathVariable referere til stien i @GetMapping og giver url et unikt id
+    Et User objekt bliver oprettet med getUserByMail metoden fra UseCase klassen med principal
+    værdien til at finde brugeren
+    Et Recipe objekt bliver oprettet med det id du får når du trykker på en opskrift i recipes.html
+    Der bliver så oprettet et Map objekt som indenholder en liste af ingredienser som er justeret til brugeren
+    for løkken indsætter ingrediensernes information som så bliver sat ind i
+    recipe og adjustedIngredients pladsen i recipeInfo.html
+    Den sender dig så ind i recipeInfo.html siden
+     */
     @GetMapping("/recipe/{id}")
     public String recipeInfo(Model model, @PathVariable int id, Principal principal){
         User user = useCase.getUserByMail(principal.getName());

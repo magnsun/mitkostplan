@@ -114,8 +114,8 @@ public class User {
         mealCalories.put((byte) 1, adjustCaloriesForGoal()*0.3);
         mealCalories.put((byte) 2, adjustCaloriesForGoal()*0.3);
 
-        LOGGER.info("dailu calories is: " + bmr);
-        LOGGER.info("Split Daily Calories: " + mealCalories);
+//        LOGGER.info("dailu calories is: " + bmr);
+//        LOGGER.info("Split Daily Calories: " + mealCalories);
 
         return mealCalories;
     }

@@ -25,23 +25,35 @@ public class UseCase {
         this.dbController = dbController;
     }
     private static  final Logger LOGGER = Logger.getLogger(RecipeController.class.getName());
-    //update items
+
+    /*
+    BMR bliver udregnet i User klassen
+    updateUser bliver kørt som sender et SQL query som opdatere databasen
+     */
     public void updateUser(User user) {
         user.calculateBMR();
         dbController.updateUser(user);
     }
 
+    /*
+    Kalder en metode som sender et SQL query som opdatere vores database
+     */
     public void changeSub(User user){
         dbController.changeSub(user);
     }
 
 
-    //delete items
+    /*
+    Kalder en metode som sender et SQL query som opdatere vores database
+     */
     public void deleteUserByEmail(String email){
         dbController.deleteUserByEmail(email);
     }
 
-    //find item by x item
+    /*
+    Optional betyder at det godt må være NULL
+    if statementen tjekker om vi fandt en bruger og hvis den ikke gør sender den fejlbeskeden
+     */
     public User getUserByMail(String email){
         Optional<User>userOptional = dbController.findByMail(email);
         if (userOptional.isPresent()){
@@ -50,16 +62,28 @@ public class UseCase {
             throw new RuntimeException("User not found");
         }
     }
+
+    /*
+    Optional betyder at det godt må være NULL
+    optionalRecipe.orElse(null) hvis der ikke bliver fundet noget returnere den NULL
+     */
     public Recipe getRecipe(int id) {
         Optional<Recipe> optionalRecipe = dbController.getRecipe(id);
         return optionalRecipe.orElse(null);
     }
 
+    /*
+    Optional betyder at det godt må være NULL
+    optionalRecipe.orElse(null) hvis der ikke bliver fundet noget returnere den NULL
+    */
     public Ingredient getIngredient(int id) {
         Optional<Ingredient> optionalIngredient = dbController.getIngredient(id);
         return optionalIngredient.orElse(null);
     }
 
+    /*
+    Henter ingredienser ud fra et recipe 5id
+     */
     public List<RecipeIngredient>recipeIngredient(int recipeId){
       return dbController.getRecipeIngredient(recipeId);
     }
@@ -69,13 +93,30 @@ public class UseCase {
         return dbController.getAllRecipes();
     }
 
-    // Create user
+    /*
+    bruger User objektet fra controlleren
+    kører calculateBMR metoden fra User klassen
+    kører createUser metoden som sender et SQL query som opretter en bruger i vores database
+     */
     public void createUser(User user){
         user.calculateBMR();
         dbController.createUser(user);
     }
 
     // Do not make unit test of this
+    /*
+    Vi bruger metoden splitDailyCalories fra User klassen og sætter det ind i et map hvor den har udregnet kaloriefordelingen
+    Så udregner den hvor mange kalorier der er i den individuelle opskrift
+    Opretter totalRecipeCalories parameteren
+    Henter alle ingredienser som er forbundet med opskriften vi regner på
+    kører on for løkke som henter mængden fra alle ingredienserne og kalorierne fra alle ingredienserne
+    og til sidst laver totalRecipeCalories parameteren som er alle ingrediensers kalorier samlet
+    scaleFactor scalleringen som hvor meget ingredienserne skal øges eller sænkes med
+    det bliver udregnet med mealTypeCalories/totalRecipeCalories eg. 0.8, 1.2
+    laver et map som indenholder ingrediensens id og hvor meget der skal være i opskriften
+    laver en for løkke som skalere vores ingredienser til brugeren og indsætter værdierne i et map
+    vi returnere derefter det map
+     */
   public Map<RecipeIngredient, Integer> calculateIngredientAmount(Recipe recipe, User user){
 
         LOGGER.info("Calculating adjusted recipe for Recipe ID: " + recipe.getId() + " and User ID: " + user.getId());
@@ -112,24 +153,4 @@ public class UseCase {
         LOGGER.info("Adjusted ingredients: " + adjustedIngredients);
         return adjustedIngredients;
   }
-  
-
-    // Do not make unit test of this
-    public void getUserRecipes(User user){
-        double bmr = user.getBmr();
-
-        double breakfastCalories = bmr * 0.4;
-        double lunchCalories = bmr * 0.3;
-        double dinnerCalories = bmr * 0.3;
-
-    }
-
-    // Do not make unit test of this
-    public double calculateAmountOfIngredient(double gramOfIngredient, double nutritionPr100Gram, double sumOfNutritionPr100Gram, double customersRequiredNutrition) {
-        double requiredAmountOfIngredient;
-
-        requiredAmountOfIngredient = 100 * ((((nutritionPr100Gram / 100) * gramOfIngredient) / sumOfNutritionPr100Gram * 100) * customersRequiredNutrition);
-
-        return requiredAmountOfIngredient;
-    }
 }

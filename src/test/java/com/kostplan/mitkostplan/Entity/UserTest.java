@@ -137,8 +137,8 @@ class UserTest {
 
     @Test
     void adjustMeals(){
-        user.setGoal((byte) 3);
-        user.setActivity((byte) 5);
+        user.setGoal((byte) 1);
+        user.setActivity((byte) 4);
 
         double mealCaloriesTest = user.adjustCaloriesForGoal();
         double breakfast = mealCaloriesTest*0.4;

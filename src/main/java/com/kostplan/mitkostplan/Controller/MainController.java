@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
+/*
+Bliver måske fjernet
+ */
+
 @Controller
 @RequestMapping("/main")
 public class MainController {
