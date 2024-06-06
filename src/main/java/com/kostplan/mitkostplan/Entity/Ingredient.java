@@ -11,10 +11,10 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int calories;
-    private int fat;
-    private int protein;
-    private int carbohydrates;
+    private double calories;
+    private double fat;
+    private double protein;
+    private double carbohydrates;
     @OneToMany(mappedBy = "ingredient")
     private Set<RecipeIngredient>recipeIngredients;
 
@@ -47,7 +47,7 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getCalories() {
+    public double getCalories() {
         return calories;
     }
 
@@ -55,7 +55,7 @@ public class Ingredient {
         this.calories = calories;
     }
 
-    public int getFat() {
+    public double getFat() {
         return fat;
     }
 
@@ -63,7 +63,7 @@ public class Ingredient {
         this.fat = fat;
     }
 
-    public int getProtein() {
+    public double getProtein() {
         return protein;
     }
 
@@ -71,7 +71,7 @@ public class Ingredient {
         this.protein = protein;
     }
 
-    public int getCarbohydrates() {
+    public double getCarbohydrates() {
         return carbohydrates;
     }
 

@@ -79,7 +79,7 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         model.addAttribute("adjustedIngredients", adjustedIngredients);
 
-        List<Integer> nutritionList = new ArrayList<>();
+        List<Double> nutritionList;
         nutritionList = useCase.calculateIngredientAmountNutrients(recipe, user);
 
         model.addAttribute("nutritionCalories", nutritionList.get(0));

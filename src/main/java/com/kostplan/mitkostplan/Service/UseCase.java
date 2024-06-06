@@ -9,6 +9,8 @@ import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -151,7 +153,7 @@ public class UseCase {
         return adjustedIngredients;
   }
 
-    public List<Integer> calculateIngredientAmountNutrients(Recipe recipe, User user){
+    public List<Double> calculateIngredientAmountNutrients(Recipe recipe, User user){
 
         LOGGER.info("Calculating adjusted recipe for Recipe ID: " + recipe.getId() + " and User ID: " + user.getId());
 
@@ -177,36 +179,43 @@ public class UseCase {
 
         LOGGER.info("Scale Factor: " + scaleFactor);
 
-        List<Integer> caloriesList = new ArrayList<>();
-        List<Integer> fatList = new ArrayList<>();
-        List<Integer> proteinList = new ArrayList<>();
-        List<Integer> carbohydratesList = new ArrayList<>();
+        List<Double> caloriesList = new ArrayList<>();
+        List<Double> fatList = new ArrayList<>();
+        List<Double> proteinList = new ArrayList<>();
+        List<Double> carbohydratesList = new ArrayList<>();
 
         for (RecipeIngredient ingredient : ingredientList) {
-            caloriesList.add((int) (ingredient.getIngredient().getCalories() / 100 * ingredient.getQuantity() * scaleFactor));
-            fatList.add((int) (ingredient.getIngredient().getFat() / 100 * ingredient.getQuantity() * scaleFactor));
-            proteinList.add((int) (ingredient.getIngredient().getProtein() / 100 * ingredient.getQuantity() * scaleFactor));
-            carbohydratesList.add((int) (ingredient.getIngredient().getCarbohydrates() / 100 * ingredient.getQuantity() * scaleFactor));
+            caloriesList.add((ingredient.getIngredient().getCalories() / 100 * ingredient.getQuantity()) * scaleFactor);
+            fatList.add((ingredient.getIngredient().getFat() / 100 * (ingredient.getQuantity() * scaleFactor)));
+            proteinList.add((ingredient.getIngredient().getProtein() / 100 * (ingredient.getQuantity() * scaleFactor)));
+            carbohydratesList.add((ingredient.getIngredient().getCarbohydrates() / 100 * (ingredient.getQuantity() * scaleFactor)));
         }
 
-        int calories = 0;
-        int fat = 0;
-        int protein = 0;
-        int carbohydrates = 0;
+        LOGGER.info("calorieList = " + caloriesList + " FatList = " + fatList + " proteinList = " + proteinList + " carbohydratesList = " + carbohydratesList);
+
+        double calories = 0;
+        double fat = 0;
+        double protein = 0;
+        double carbohydrates = 0;
 
         for (int i = 0; i < caloriesList.size(); i++) {
             calories += caloriesList.get(i);
             fat += fatList.get(i);
             protein += proteinList.get(i);
             carbohydrates += carbohydratesList.get(i);
+            LOGGER.info("calories = " + calories + " fat = " + fat + " protein = " +  protein + " carbohydrates = " + carbohydrates);
         }
 
-        List<Integer> nutritionList = new ArrayList<>();
+        BigDecimal caloriesBD = new BigDecimal(calories).setScale(1, RoundingMode.HALF_UP);
+        BigDecimal fatBD = new BigDecimal(fat).setScale(1, RoundingMode.HALF_UP);
+        BigDecimal proteinBD = new BigDecimal(protein).setScale(1, RoundingMode.HALF_UP);
+        BigDecimal carbohydratesBD = new BigDecimal(carbohydrates).setScale(1, RoundingMode.HALF_UP);
 
-        nutritionList.add(calories);
-        nutritionList.add(fat);
-        nutritionList.add(protein);
-        nutritionList.add(carbohydrates);
+        List<Double> nutritionList = new ArrayList<>();
+        nutritionList.add(caloriesBD.doubleValue());
+        nutritionList.add(fatBD.doubleValue());
+        nutritionList.add(proteinBD.doubleValue());
+        nutritionList.add(carbohydratesBD.doubleValue());
 
         return nutritionList;
     }

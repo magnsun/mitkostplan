@@ -78,20 +78,30 @@ public class User {
     }
 
     private double getActivityMultiplier(){
+        double multiplier;
+
         switch (activity){
             case 0:
-                return 1.2;
+                multiplier = 1.2;
+                break;
             case 1:
-                return 1.5;
+                multiplier = 1.5;
+                break;
             case 2:
-                return 1.7;
+                multiplier = 1.7;
+                break;
             case 3:
-                return 1.9;
+                multiplier = 1.9;
+                break;
             case 4:
-                return 2.4;
+                multiplier = 2.4;
+                break;
             default:
-                return 1;
+                multiplier = 1;
+                break;
         }
+
+        return multiplier;
     }
 
     private int regulateWithGoal(){
