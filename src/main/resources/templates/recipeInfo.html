@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Recipe Info</title>
     <link rel="stylesheet" href="/recipeInfoStyle.css">
+    <link rel="stylesheet" href="/topMenu.css">
 </head>
 <body>
+
+<div th:replace="~{topMenu :: top-menu}"></div>.
+
 <div class="recipe-info">
     <h1 th:text="${recipe.name}"></h1>
     <p><strong>Meal Type:</strong>

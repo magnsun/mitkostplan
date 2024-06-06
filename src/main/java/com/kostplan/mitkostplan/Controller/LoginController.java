@@ -38,7 +38,6 @@ return "login" skifter siden til login.html
         if (error != null){
             model.addAttribute("loginError", "Invalid email or password");
         }
-
         model.addAttribute("loginForm", new User());
         return "login";
     }

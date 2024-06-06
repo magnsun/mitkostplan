@@ -92,7 +92,7 @@ public class DbController {
     //Get all Recipes
     public List<Recipe> getAllRecipes() {
         try {
-            String sql = "SELECT * FROM recipe";
+            String sql = "SELECT * FROM recipe ORDER BY mealType";
             return jdbcTemplate.query(sql, recipeRowMapper());
         }catch (EmptyResultDataAccessException e){
             return null;

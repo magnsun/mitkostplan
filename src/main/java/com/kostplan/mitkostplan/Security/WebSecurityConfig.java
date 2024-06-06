@@ -25,19 +25,19 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/static/**","/js/**","/images/**", "/login", "/login/create", "/login/createUser", "/loginStyle.css", "createStyle.css").permitAll()
+                        .requestMatchers("/static/**","/js/**","/images/**", "/img/**", "/", "/forside", "/login", "/login/create", "/login/createUser", "/forside.css", "/loginStyle.css", "createStyle.css").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/main", true)
+                        .defaultSuccessUrl("/recipes", true)
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/main/logout")
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/")
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)

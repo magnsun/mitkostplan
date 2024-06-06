@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/topMenu.css">
+</head>
+<body>
+<div th:fragment="top-menu">
+    <!-- Your menu code here -->
+    <div class="menu">
+        <a href="/recipes" class="page-title-container">
+            <img src="/img/MinkostplanLogo.png" alt="Minkostplan Logo" class="page-title">
+        </a>
+        <div class="right-menu">
+            <a th:href="@{/settings}" class="menu-item">
+                <img src="/img/settings.png" alt="Settings Icon">
+                Settings
+            </a>
+            <form th:action="@{/main/logout}" method="post" class="logout-form">
+                <button type="submit" class="logout-button">
+                    <img src="/img/logout.png" alt="Logout Icon">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- End of your menu code -->
+</div>
+</body>
+</html>

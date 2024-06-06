@@ -1,5 +1,3 @@
-/* recipes.css */
-
 body {
     font-family: Arial, sans-serif;
     background-color: #e8f5e9; /* Light green background */
@@ -8,24 +6,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
 }
 
-h1 {
-    color: #388e3c; /* Dark green for the header */
-    margin-bottom: 20px;
+a:not(.menu-item) {
+    text-decoration: none;
+    color: #388e3c; /* Dark green for the link */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-div {
-    margin-bottom: 20px;
+a:not(.page-title-container):hover {
+    background-color: #388e3c; /* Dark green background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+.info-container {
+    margin-top: 80px;
     text-align: center;
 }
 
 div p {
     font-size: 18px;
     color: #388e3c; /* Dark green for the text */
-    margin: 5px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 table {
@@ -56,19 +64,4 @@ td {
 tbody tr:nth-child(even) {
     background-color: #f2f2f2; /* Light grey for alternating rows */
     border-radius: 10px;
-}
-
-a {
-    text-decoration: none;
-    color: #388e3c; /* Dark green for the link */
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-    margin-top: 20px;
-}
-
-a:hover {
-    background-color: #388e3c; /* Dark green background on hover */
-    color: #ffffff; /* White text on hover */
 }

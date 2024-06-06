@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <title>User info</title>
     <link rel="stylesheet" href="/updatePageStyle.css">
+    <link rel="stylesheet" href="/topMenu.css">
 </head>
 <body>
 
+<div th:replace="~{topMenu :: top-menu}"></div>.
+
 <h1>User info</h1>
 
-<form action="#" th:action="@{/settings/updateUser}" th:object="${updateUser}" method="post">
+<form action="#" th:action="@{/settings/updateUser}" th:object="${updateUser}" class="updateUser" method="post">
     <div>
         <label for="name">Name:</label>
         <input type="text" id="name" th:field="*{name}" required>

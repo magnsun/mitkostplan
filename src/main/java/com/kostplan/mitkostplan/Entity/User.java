@@ -73,8 +73,8 @@ public class User {
         return bmr;
     }
 
-    public double adjustCaloriesForGoal(){
-        return calculateBMR() + regulateWithGoal();
+    public int adjustCaloriesForGoal(){
+        return (int) (calculateBMR() + regulateWithGoal());
     }
 
     private double getActivityMultiplier(){
@@ -116,6 +116,8 @@ public class User {
 
 //        LOGGER.info("dailu calories is: " + bmr);
 //        LOGGER.info("Split Daily Calories: " + mealCalories);
+
+
 
         return mealCalories;
     }

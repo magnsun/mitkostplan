@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <title>Settings</title>
     <link rel="stylesheet" href="/settingStyle.css">
+    <link rel="stylesheet" href="/topMenu.css">
 </head>
 <body>
 
+<div th:replace="~{topMenu :: top-menu}"></div>.
+
 <h1>Settings</h1>
 
-<form action="#" th:action="@{/settings/update}" method="get">
-    <button type="submit">Update info</button>
-</form>
-<form action="#" th:action="@{/settings/subscribe}" th:object="${changeSub}" method="post">
-    <button type="submit" th:text="${isSubscribed} ? 'Unsubscribe' : 'Subscribe'"></button>
-</form>
-<form action="#" th:action="@{/settings/deleteUser}" class="deleteUser" method="post">
-    <button type="submit" onclick="return confirm('Are you sure u want to delete this account?\nAll data wil be lost.');">Delete account</button>
-</form>
-
-<a th:href="@{/main}">Back</a>
+<div class="settingButtons">
+    <form action="#" th:action="@{/settings/update}" method="get">
+        <button type="submit">Update info</button>
+    </form>
+    <form action="#" th:action="@{/settings/subscribe}" th:object="${changeSub}" method="post">
+        <button type="submit" th:text="${isSubscribed} ? 'Unsubscribe' : 'Subscribe'"></button>
+    </form>
+    <form action="#" th:action="@{/settings/deleteUser}" class="deleteUser" method="post">
+        <button type="submit" onclick="return confirm('Are you sure u want to delete this account?\nAll data wil be lost.');">Delete account</button>
+    </form>
+</div>
+<a th:href="@{/recipes}">Back</a>
 
 </body>
 </html>

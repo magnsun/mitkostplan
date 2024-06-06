@@ -17,7 +17,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-form {
+form.updateUser {
     background-color: #ffffff; /* White background for the form */
     padding: 20px;
     border-radius: 8px;
@@ -47,12 +47,12 @@ form input, form select {
     font-size: 16px;
 }
 
-form input:focus, form select:focus {
+form.updateUser input:focus, form.updateUser select:focus {
     border-color: #66bb6a; /* Medium green for focus */
     outline: none;
 }
 
-form button {
+form.updateUser button {
     background-color: #66bb6a; /* Medium green for the button */
     color: #ffffff; /* White text */
     border: none;
@@ -74,7 +74,6 @@ a {
     padding: 10px 15px;
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
-    margin-top: 20px;
 }
 
 a:hover {

@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <title>Recipes</title>
     <link rel="stylesheet" href="/recipesStyle.css">
+    <link rel="stylesheet" href="/topMenu.css">
 </head>
 <body>
-<h1> Recipes </h1>
 
-<div>
+<div th:replace="~{topMenu :: top-menu}"></div>.
+
+<div class="info-container">
     <p>Name: <span th:text="${userInfo.name}"></span></p>
-    <p>Daily calorie intake: <span th:text="${userInfo.bmr}"></span></p>
+    <p>Daily calorie intake: <span th:text="${userInfo.adjustCaloriesForGoal()}"></span></p>
 </div>
 
 <table>
@@ -23,7 +25,7 @@
     </thead>
     <tbody>
         <tr th:each="recipe : ${recipes} ">
-            <td><a th:href="@{/recipes/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></td>
+            <td><a th:href="@{/recipes/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}" class="table-recipe"></a></td>
             <td>
                 <span th:if="${recipe.mealType == 0}" th:text="'Breakfast'"></span>
                 <span th:if="${recipe.mealType == 1}" th:text="'Lunch'"></span>
@@ -33,7 +35,5 @@
         </tr>
     </tbody>
 </table>
-<a href="/main">Back</a>
-
 </body>
 </html>

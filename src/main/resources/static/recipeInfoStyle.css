@@ -2,12 +2,12 @@ body {
     font-family: Arial, sans-serif;
     background-color: #e8f5e9; /* Light green background */
     margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    padding-top: 95px;
 }
 
 h1 {
