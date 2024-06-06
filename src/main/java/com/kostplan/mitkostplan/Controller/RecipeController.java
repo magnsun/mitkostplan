@@ -79,6 +79,14 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         model.addAttribute("adjustedIngredients", adjustedIngredients);
 
+        List<Integer> nutritionList = new ArrayList<>();
+        nutritionList = useCase.calculateIngredientAmountNutrients(recipe, user);
+
+        model.addAttribute("nutritionCalories", nutritionList.get(0));
+        model.addAttribute("nutritionFat", nutritionList.get(1));
+        model.addAttribute("nutritionProtein", nutritionList.get(2));
+        model.addAttribute("nutritionCarbohydrates", nutritionList.get(3));
+
         return "recipeInfo";
     }
 

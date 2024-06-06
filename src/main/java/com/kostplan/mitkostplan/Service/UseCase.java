@@ -9,11 +9,8 @@ import com.kostplan.mitkostplan.Repository.DbController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
-import java.util.HashMap;
 
 @Service
 public class UseCase {
@@ -153,4 +150,64 @@ public class UseCase {
         LOGGER.info("Adjusted ingredients: " + adjustedIngredients);
         return adjustedIngredients;
   }
+
+    public List<Integer> calculateIngredientAmountNutrients(Recipe recipe, User user){
+
+        LOGGER.info("Calculating adjusted recipe for Recipe ID: " + recipe.getId() + " and User ID: " + user.getId());
+
+        Map<Byte, Double> mealCalories = user.splitDailyCalories();
+        double mealTypeCalories = mealCalories.get(recipe.getMealType());
+
+        LOGGER.info("mealType Calories: " + mealTypeCalories);
+
+        double totalRecipeCalories = 0;
+
+
+        List<RecipeIngredient> ingredientList = dbController.getRecipeIngredient(recipe.getId());
+
+        for (RecipeIngredient recipeIngredient : ingredientList){
+            double gramOfIngredient = recipeIngredient.getQuantity();
+            double caloriesPer100Gram = recipeIngredient.getIngredient().getCalories();
+            totalRecipeCalories += (caloriesPer100Gram/100)*gramOfIngredient;
+        }
+
+        LOGGER.info("Total Recipe Calories: " + totalRecipeCalories);
+
+        double scaleFactor = mealTypeCalories/totalRecipeCalories;
+
+        LOGGER.info("Scale Factor: " + scaleFactor);
+
+        List<Integer> caloriesList = new ArrayList<>();
+        List<Integer> fatList = new ArrayList<>();
+        List<Integer> proteinList = new ArrayList<>();
+        List<Integer> carbohydratesList = new ArrayList<>();
+
+        for (RecipeIngredient ingredient : ingredientList) {
+            caloriesList.add((int) (ingredient.getIngredient().getCalories() / 100 * ingredient.getQuantity() * scaleFactor));
+            fatList.add((int) (ingredient.getIngredient().getFat() / 100 * ingredient.getQuantity() * scaleFactor));
+            proteinList.add((int) (ingredient.getIngredient().getProtein() / 100 * ingredient.getQuantity() * scaleFactor));
+            carbohydratesList.add((int) (ingredient.getIngredient().getCarbohydrates() / 100 * ingredient.getQuantity() * scaleFactor));
+        }
+
+        int calories = 0;
+        int fat = 0;
+        int protein = 0;
+        int carbohydrates = 0;
+
+        for (int i = 0; i < caloriesList.size(); i++) {
+            calories += caloriesList.get(i);
+            fat += fatList.get(i);
+            protein += proteinList.get(i);
+            carbohydrates += carbohydratesList.get(i);
+        }
+
+        List<Integer> nutritionList = new ArrayList<>();
+
+        nutritionList.add(calories);
+        nutritionList.add(fat);
+        nutritionList.add(protein);
+        nutritionList.add(carbohydrates);
+
+        return nutritionList;
+    }
 }

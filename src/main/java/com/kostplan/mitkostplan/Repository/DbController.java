@@ -18,12 +18,27 @@ import java.util.Optional;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
+  /* @Repository Annotation er en specialisering af @Component annotation,
+    som bruges til at indikere,
+    at klassen giver mekanismen til lagring,
+    hentning, opdatering, sletning og søgeoperation på objekter.
+    Selvom det er en specialisering af @Component-annotering,
+    så bliver Spring Repository-klasser
+    autodetekteret af springramme gennem klassestiscanning
+   */
 @Repository
 public class DbController {
 
     private final JdbcTemplate jdbcTemplate;
 
-
+      /*
+      @Autowired er en annotation i Spring Framework,
+      der muliggør afhængighedsinjektion for Java-klasser.
+      Det giver Spring mulighed for automatisk at injicere afhængigheder i klassen,
+      hvilket eliminerer behovet for manuel konfiguration.
+      Denne annotation kan bruges til at injicere afhængigheder i felter,
+      metoder og konstruktører.
+       */
     @Autowired
     public DbController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -103,7 +118,7 @@ public class DbController {
     public Optional<Recipe> getRecipe(int id){
         String sql = "SELECT * FROM recipe WHERE id=?";
         try{
-            Recipe recipe = jdbcTemplate.queryForObject(sql, new Object[]{id}, recipeRowMapper());
+            Recipe recipe = jdbcTemplate.queryForObject(sql, recipeRowMapper(), id);
             return Optional.ofNullable(recipe);
         }catch (EmptyResultDataAccessException e){
             return Optional.empty();

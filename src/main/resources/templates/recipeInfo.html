@@ -30,11 +30,12 @@
     <p><strong>Method:</strong></p>
     <div class="method" th:utext="${formattedMethod}"></div>
 
-    <p><strong>Calories:</strong> <span th:text="${recipe.calories}"></span></p>
-    <p><strong>Fat:</strong> <span th:text="${recipe.fat}"></span></p>
-    <p><strong>Protein:</strong> <span th:text="${recipe.protein}"></span></p>
-    <p><strong>Carbohydrates:</strong> <span th:text="${recipe.carbonhydrates}"></span></p>
-
+    <li th:each="nutrition : ${nutritionCalories}">
+        <p><strong>Calories:</strong> <span th:text="${nutritionCalories}"></span></p>
+        <p><strong>Fat:</strong> <span th:text="${nutritionFat}"></span></p>
+        <p><strong>Protein:</strong> <span th:text="${nutritionProtein}"></span></p>
+        <p><strong>Carbohydrates:</strong> <span th:text="${nutritionCarbohydrates}"></span></p>
+    </li>
 
 </div>
 <a th:href="@{/recipes}" class="back-link">Back to Recipes</a>
