@@ -62,6 +62,12 @@ public class User {
     }
 
     //calculateBMR
+
+    /*
+    Her laver vi så selve vores udregnning for vores BMR udregnning, vi starter med at tage brugerens vægt,
+    højde og mål, vi kontrolere at deres køn enten er mand eller kvinde, dette bliver til baseBMR.
+    Efter den tager vi så baseBMR og ganger med getActivityMultiplier, for den nye bmr værdi
+     */
     public double calculateBMR(){
         double baseBMR;
         if (sex == 0) {
@@ -72,10 +78,17 @@ public class User {
         bmr = (int) (baseBMR*getActivityMultiplier());
         return bmr;
     }
+    /*
+    Her tager vi så vovres tidligere udregning af bmr og lægger sammen med vores mål, dette giver os så værdien
+    for adjustCaloriesForGoal
+     */
 
     public int adjustCaloriesForGoal(){
         return (int) (calculateBMR() + regulateWithGoal());
     }
+    /*
+    Vores switch case til at vore activity multiplier, som skal bruge til vores bmr udregner
+     */
 
     private double getActivityMultiplier(){
         double multiplier;
@@ -103,6 +116,10 @@ public class User {
 
         return multiplier;
     }
+    /*
+    Her er vi så vores næste switch case, hvor den skal forklare hvad deres kalorie mål, om de vil tabe, veligholde
+    tag på eller mere muskle. Den retunere en af de værdi alt efter hvad brugerne har sat som mål.
+     */
 
     private int regulateWithGoal(){
         switch (goal){
@@ -117,6 +134,12 @@ public class User {
                 return 300;
         }
     }
+
+    /*
+    Her som det sidste laver vi så vores måltidsfordeling, vi tager adjustCaloriesForGoal, hvor den bliver
+    delt i tre del, 40% morgenmad, 30% frokost og 30% aftensmad. Dette giver så vores måltidsværdier vi skal bruge
+    til vores andre udregninger
+     */
 
     public Map<Byte, Double> splitDailyCalories(){
         Map<Byte, Double> mealCalories = new HashMap<>();
