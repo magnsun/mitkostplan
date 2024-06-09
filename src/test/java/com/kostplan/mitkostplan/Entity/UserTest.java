@@ -13,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
     private User user;
 
+    /*
+    Vi laver en @BeforeEach som gør at hver gang vi skal køre en test for en user skal den user altid have den data.
+     */
+
     @BeforeEach
     void setUp(){
 
@@ -28,6 +32,11 @@ class UserTest {
 //        user.setActivity((byte)3);
 
     }
+    /*
+    Laver den første test, ved at beregne BMR, den tager de informationer der lavet af vores user,
+    De bliver udregnet i koden, resultatet de så får skal så give det samme som, hvis vi kørte programmet i dens helhed
+    Delta er sat til 1 og 2 da værdierne, normalt er komma tal
+     */
     @Test
     void testCalulateBMRMaleQuiet() {
 
@@ -92,6 +101,10 @@ class UserTest {
         double BMRresult = user.calculateBMR();
         assertEquals(BMRcalulations, BMRresult, 1);
     }
+
+    /*
+    Gør det samme som den ovenover, men vi tilføjer setGoal til yderliger udregnning
+     */
     @Test
     void testGoalLoseWeight() {
         user.setGoal((byte) 0);
@@ -134,6 +147,7 @@ class UserTest {
         double BMRresult = user.adjustCaloriesForGoal();
         assertEquals(BMRadjust, BMRresult, 1);
     }
+
 
     @Test
     void adjustMeals(){

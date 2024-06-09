@@ -32,13 +32,8 @@ public class DbController {
     private final JdbcTemplate jdbcTemplate;
 
       /*
-      @Autowired er en annotation i Spring Framework,
-      der muliggør afhængighedsinjektion for Java-klasser.
-      Det giver Spring mulighed for automatisk at injicere afhængigheder i klassen,
-      hvilket eliminerer behovet for manuel konfiguration.
-      Denne annotation kan bruges til at injicere afhængigheder i felter,
-      metoder og konstruktører.
-       */
+      @Autowired tillader spring automatisk at sætte dependencies ind i klasse, med andre ord gøre den selve den
+    * Afhænglighed mellem klasser mere simple  */
     @Autowired
     public DbController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

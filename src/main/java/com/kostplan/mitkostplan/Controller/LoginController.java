@@ -18,7 +18,9 @@ public class LoginController {
     private final UseCase useCase;
     private final PasswordEncoder passwordEncoder;
 
-    /*@Autowired skal læses på.*/
+    /*@Autowired tillader spring automatisk at sætte dependencies ind i klasse, med andre ord gøre den selve den
+    * Afhænglighed mellem klasser mere simple*/
+
     @Autowired
     private LoginController(UseCase useCase, PasswordEncoder passwordEncoder){
         this.useCase = useCase;

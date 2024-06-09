@@ -22,29 +22,30 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final DbController dbController;
 
-    // details of the user that kan be seen in HTML
+    // contrucktor injektion af dbController
     @Autowired
     public UserDetailsServiceImpl(DbController dbController) {
         this.dbController = dbController;
     }
 
+    // Denne metode retunere en collection af authorities (Roller) for en given bruger
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorities;
     }
 
-    //to find user inform form load username
-
+    // Denne metode bliver brugt til at indlæse en bruger udfra brugernavn(Email).
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             Optional <User> optionalUser = dbController.findByMail(username);
-            if (optionalUser.isEmpty()) {
+            if (optionalUser.isEmpty()) { //hvis brugeren ikke bliver fundet
                 throw new UsernameNotFoundException("User not found");
             }
 
-            User user = optionalUser.get();
+            User user = optionalUser.get(); // hvis en bruger bliver fundet, henter vi brugeren fra optional
+            //Så retunere vi et UserDetails objekt med brugerens email, password og authorities
             return new org.springframework.security.core.userdetails.User(
                     user.getEmail(),
                     user.getPassword(),
@@ -52,6 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             );
 
         } catch (EmptyResultDataAccessException e){
+            //hvis der en exception når vi prøver at finde brugeren, kaster vi en UsernameNotFoundException
             throw new UsernameNotFoundException("User not found with email: " + username);
         }
     }

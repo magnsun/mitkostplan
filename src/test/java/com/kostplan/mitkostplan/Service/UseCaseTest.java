@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static net.sf.jsqlparser.util.validation.metadata.NamedObject.user;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 class UseCaseTest {
     @Mock
@@ -29,10 +29,8 @@ class UseCaseTest {
     @InjectMocks
     UseCase useCase;
 
-    @InjectMocks
     private User user;
 
-    @InjectMocks
     private Recipe recipe;
 
     private RecipeIngredient recipeIngredient0;
@@ -48,11 +46,8 @@ class UseCaseTest {
     @BeforeEach
 
     void setUp(){
-        MockitoAnnotations.openMocks(this);
-
-       user = new User ();
-
-
+    user = new User ();
+        MockitoAnnotations.initMocks(this);
 
 
         user.setSex((byte) 0);
@@ -66,7 +61,6 @@ class UseCaseTest {
 
         recipe.setId(1);
         recipe.setMealType((byte)0);
-        recipe.setCalories(850);
 
     recipeIngredient0 = new RecipeIngredient();
         recipeIngredient0.setQuantity(200);
@@ -95,19 +89,13 @@ class UseCaseTest {
         ing3.setCalories(86);
         recipeIngredient3.setIngredient(ing3);
 
+//    when(jdbcTemplate.query(
+//            "SELECT * FROM RecipeIngredient WHERE recipe_id = ?",
+//            new Object[]{1},
+//            new RecipeIngredientRowMapper())
+//            ).thenReturn(Arrays.asList(recipeIngredient0, recipeIngredient1, recipeIngredient2, recipeIngredient3));
 
-//        when(jdbcTemplate.query(
-//                "SELECT * FROM RecipeIngredient WHERE recipe_id = ?",
-//                new Object[]{1},
-//                (rs, rowNum) -> {
-//                    RecipeIngredient recipeIngredient = new RecipeIngredient();
-//                    return recipeIngredient;
-//                }
-//        )).thenReturn(Arrays.asList(recipeIngredient0, recipeIngredient1, recipeIngredient2, recipeIngredient3));
-//
-        Map<Byte, Double> mealCalories = new HashMap<>();
-        mealCalories.put((byte)0, 850.0);
-        doReturn(mealCalories).when(user).splitDailyCalories();
+
     }
 
 
@@ -115,10 +103,16 @@ class UseCaseTest {
     void testRecipeIngredient(){
 
 
-        Map<RecipeIngredient, Integer> result = useCase.calculateIngredientAmount(recipe, user);
+
+
+        Map<Byte, Double> mealCalories = new HashMap<>();
+        mealCalories.put((byte)0, 2000.0);
+        when(user.splitDailyCalories()).thenReturn(mealCalories);
+
+        Map<RecipeIngredient, Integer> resultCalories = useCase.calculateIngredientAmount(recipe, user);
 
         double totalRecipeCalories = ((50.0 / 100) * 200) + ((85.0 / 100) * 50) + ((100.0 / 100) * 25) + ((86.0 / 100) * 35);
-        double scalefactor = totalRecipeCalories/850;
+        double scalefactor = 2000.0/totalRecipeCalories;
 
         Map<RecipeIngredient, Integer> expectedCalories = new HashMap<>();
         expectedCalories.put(recipeIngredient0, (int) (200*scalefactor));
@@ -126,7 +120,7 @@ class UseCaseTest {
         expectedCalories.put(recipeIngredient2, (int) (25*scalefactor));
         expectedCalories.put(recipeIngredient3, (int) (35*scalefactor));
 
-        assertEquals(expectedCalories,result);
+        assertEquals(expectedCalories,resultCalories);
 
 
 
